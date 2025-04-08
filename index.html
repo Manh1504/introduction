@@ -38,9 +38,55 @@
         <!-- Course 1 -->
         <div class="course-card">
             <h3>Khóa học Lập trình C cơ bản</h3>
-            <a href="NgonnguC.html">
-                <img src="https://d3hi6wehcrq5by.cloudfront.net/itnavi-blog/2020/06/Ng%C3%B4n-ng%E1%BB%AF-l%E1%BA%ADp-tr%C3%ACnh-C-5.jpg" alt="Ngôn ngữ lập trình C" width="250" height="150">
-            </a>
+            <h3>Khóa học Lập trình C cơ bản</h3>
+             <img onclick="moModal()" src="https://d3hi6wehcrq5by.cloudfront.net/itnavi-blog/2020/06/Ng%C3%B4n-ng%E1%BB%AF-l%E1%BA%ADp-tr%C3%ACnh-C-5.jpg"  alt="Ngôn ngữ lập trình C" width="250" height="150">
+                <div id="modalContainer" class="modal-overlay"></div>
+                <script>
+                    function moModal() {
+                      fetch('NgonnguC.html')
+                        .then(response => response.text())
+                        .then(data => {
+                          const modalContainer = document.getElementById('modalContainer');
+                  
+                          // Tạo element tạm để parse HTML
+                          const temp = document.createElement('div');
+                          temp.innerHTML = data;
+                  
+                          // Lấy tất cả các script
+                          const scripts = temp.querySelectorAll('script');
+                  
+                          // Chèn nội dung vào modal
+                          modalContainer.innerHTML = temp.innerHTML;
+                  
+                          // Gắn từng script lại vào DOM để chúng được thực thi
+                          scripts.forEach(oldScript => {
+                            const newScript = document.createElement('script');
+                            if (oldScript.src) {
+                              newScript.src = oldScript.src;
+                            } else {
+                              newScript.textContent = oldScript.textContent;
+                            }
+                            document.body.appendChild(newScript);
+                          });
+                  
+                          modalContainer.style.display = 'flex';
+                        });
+                    }
+                  
+                    function dongModal() {
+                      document.getElementById('modalContainer').style.display = 'none';
+                    }
+                     // dí ra ngoài thì thoát
+                    window.onclick = function(event) {
+                      const modalContainer = document.getElementById('modalContainer');
+                      if (event.target == modalContainer) {
+                        dongModal();
+                      }
+                    }
+                  </script>
+                  
+            <p>Khóa học này sẽ giúp bạn nắm vững các khái niệm cơ bản về lập trình C, từ các cấu trúc điều khiển đến việc quản lý bộ nhớ.</p>
+            <button>Thêm vào giỏ hàng</button>
             <p>Khóa học này sẽ giúp bạn nắm vững các khái niệm cơ bản về lập trình C, từ các cấu trúc điều khiển đến việc quản lý bộ nhớ.</p>
             <button>Thêm vào giỏ hàng</button>
         </div>
