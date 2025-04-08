@@ -53,17 +53,24 @@ header {
     background-color: #007BFF;
     color: white;
 }
-.login {
-    color: white !important;
-    font-size: 12cm;
-    display: inline-block;
-    padding: 5px 15px;
-    background-color: #f44336;
-    text-align: center;
-    border-radius: 5px;
+#userArea {
+    display: flex;
+    gap: 16px;
+    align-items: center;
 }
-.login:hover {
-    background-color: #2683e8;
+
+#userArea a {
+    text-decoration: none;
+    color: #090909;
+    font-weight: 50;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+#userArea a:hover {
+    background-color: #f20db5;
+}
 }
 main {
     padding: 20px;
