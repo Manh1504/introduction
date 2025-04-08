@@ -16,9 +16,10 @@
             <a>Trang chủ</a>
             <a href="#">Người đóng góp</a>
             <a href="#">Giỏ hàng</a>
-            <button type="submit">Đăng nhập</button>
-            <a href="đăng nhập.html">Đăng nhập </a>
-            <a href="đăng ký.html">Đăng ký </a>
+            <span id="userArea">
+            <a href="đăng nhập.html" id="loginLink">Đăng nhập</a>  
+            <a href="đăng ký.html" id="registerLink">Đăng ký</a>
+            </span>
 
 
         </div>
@@ -114,5 +115,23 @@
 <footer>
     <p>&copy; 2025 CodeWithMe. All rights reserved.</p>
 </footer>
+    <script>
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const currentUser = localStorage.getItem("currentUser");
+
+    if (isLoggedIn === "true" && currentUser) {
+        const userArea = document.getElementById("userArea");
+        userArea.innerHTML = `
+            <span>Xin chào, <strong>${currentUser}</strong></span>
+            <a href="#" id="logoutLink">Đăng xuất</a>
+        `;
+
+        document.getElementById("logoutLink").addEventListener("click", function () {
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("currentUser");
+            location.reload(); // Tải lại trang để quay về giao diện chưa đăng nhập
+        });
+    }
+</script>
 </body>
 </html>
