@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Khóa học Machine Learning từ A-Z</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="machinelearning.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <a class="navbar-brand" href="#">CodeWithMe</a>
+    <div class="btn-group">
+      <a class="btn btn-outline-primary">Đăng nhập</a>
+      <a class="btn btn-primary">Đăng ký</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mb-5">
+  <div class="row">
+    <!-- Course Content -->
+    <div class="col-lg-8">
+      <img src="data:image/png;base64,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" class="course-image" alt="Machine Learning Course">
+      <h1 class="fw-bold mb-3">Machine Learning từ Cơ bản đến Nâng cao</h1>
+      <p class="text-muted">Khóa học toàn diện về Machine Learning với Python, bao gồm các thuật toán cốt lõi, xử lý dữ liệu, và triển khai mô hình thực tế. Học viên sẽ thành thạo Scikit-learn, TensorFlow và các kỹ thuật tiên tiến như Deep Learning.</p>
+
+      <!-- Tags -->
+      <div class="mb-3">
+        <span class="tag">python</span>
+        <span class="tag">tensorflow</span>
+        <span class="tag">scikit-learn</span>
+        <span class="tag">deep-learning</span>
+        <span class="tag">ai</span>
+      </div>
+
+      <!-- Author and Rating -->
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+          <strong>Giảng viên:</strong> Dr. Nguyễn Văn A<br>
+          <small class="text-muted">12,857 học viên | 98% đánh giá 5 sao</small>
+        </div>
+        <div class="text-warning fs-5">
+          ★★★★★ <span class="text-dark fs-6">4.9</span>
+        </div>
+      </div>
+
+      <!-- Course Introduction -->
+      <div>
+        <h4 class="section-title">Tổng quan khóa học</h4>
+        <p>Khóa học cung cấp lộ trình bài bản từ lý thuyết đến thực hành Machine Learning, tập trung vào các ứng dụng thực tế trong doanh nghiệp. Học viên sẽ làm việc với dataset thực từ các công ty lớn như Google, Facebook.</p>
+
+        <h5 class="mt-4">Bạn sẽ học được gì?</h5>
+        <ul>
+          <li>Xây dựng hệ thống recommendation như Netflix/Amazon</li>
+          <li>Phát triển mô hình Computer Vision cơ bản</li>
+          <li>Xử lý dữ liệu lớn với Pandas và NumPy</li>
+          <li>Triển khai mô hình lên cloud (AWS, GCP)</li>
+          <li>Kỹ thuật tối ưu siêu tham số (Hyperparameter Tuning)</li>
+        </ul>
+      </div>
+
+      <!-- Course Content -->
+      <div>
+        <h4 class="section-title">Nội dung chi tiết</h4>
+
+        <div class="mt-3">
+          <h6><i class="fa-solid fa-calculator text-primary"></i> Phần 1: Toán cơ bản cho ML</h6>
+          <ul>
+            <li>Đại số tuyến tính ứng dụng</li>
+            <li>Xác suất thống kê</li>
+            <li>Giải tích đa biến</li>
+          </ul>
+
+          <h6 class="mt-3"><i class="fa-solid fa-database text-primary"></i> Phần 2: Tiền xử lý dữ liệu</h6>
+          <ul>
+            <li>Làm sạch dữ liệu với Pandas</li>
+            <li>Feature Engineering</li>
+            <li>PCA và Dimensionality Reduction</li>
+          </ul>
+
+          <h6 class="mt-3"><i class="fa-solid fa-brain text-primary"></i> Phần 3: Thuật toán cốt lõi</h6>
+          <ul>
+            <li>Linear/Logistic Regression</li>
+            <li>Decision Trees và Random Forest</li>
+            <li>SVM và KNN</li>
+            <li>Clustering (K-means, DBSCAN)</li>
+          </ul>
+
+          <h6 class="mt-3"><i class="fa-solid fa-network-wired text-primary"></i> Phần 4: Neural Networks</h6>
+          <ul>
+            <li>Perceptron đa lớp</li>
+            <li>CNN cho xử lý ảnh</li>
+            <li>RNN cho dữ liệu chuỗi</li>
+            <li>Transfer Learning</li>
+          </ul>
+
+          <h6 class="mt-3"><i class="fa-solid fa-chart-line text-primary"></i> Phần 5: Triển khai thực tế</h6>
+          <ul>
+            <li>Đóng gói mô hình với Docker</li>
+            <li>Xây dựng API với Flask/FastAPI</li>
+            <li>ML Pipeline trên Google Cloud</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+      <div class="sidebar-card">
+        <h3 class="fw-bold text-danger">1.299.000đ <small class="text-muted fs-6"><del>2.500.000đ</del> (-48%)</small></h3>
+        <p class="text-success fw-bold mt-2"><i class="fas fa-bolt"></i> Ưu đãi còn 24h!</p>
+        <p class="mt-3"><strong>Thông tin khóa học:</strong></p>
+        <ul class="list-unstyled">
+          <li><i class="fa-solid fa-video me-2 text-primary"></i> 120 bài giảng (25h video)</li>
+          <li><i class="fa-solid fa-file-code me-2 text-primary"></i> 50 notebook thực hành</li>
+          <li><i class="fa-solid fa-certificate me-2 text-primary"></i> Chứng chỉ hoàn thành</li>
+          <li><i class="fa-solid fa-infinity me-2 text-primary"></i> Truy cập trọn đời</li>
+          <li><i class="fa-solid fa-phone me-2 text-primary"></i> Hỗ trợ 1-1</li>
+        </ul>
+        <div class="d-grid gap-3 mt-4">
+          <button class="btn btn-try"><i class="fa-solid fa-play me-2"></i>Xem bài giảng mẫu</button>
+          <button class="btn btn-buy"><i class="fa-solid fa-cart-plus me-2"></i>Thêm vào giỏ hàng</button>
+        </div>
+        <div class="mt-3 p-3 bg-light rounded">
+          <h6><i class="fas fa-gift text-danger"></i> Ưu đãi đặc biệt:</h6>
+          <ul class="small">
+            <li>Tặng khóa "Python for Data Science" trị giá 500K</li>
+            <li>Tài liệu "ML Interview Questions" độc quyền</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
