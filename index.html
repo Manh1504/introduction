@@ -38,7 +38,6 @@
         <!-- Course 1 -->
         <div class="course-card">
             <h3>Khóa học Lập trình C cơ bản</h3>
-            <h3>Khóa học Lập trình C cơ bản</h3>
              <img onclick="moModal()" src="https://d3hi6wehcrq5by.cloudfront.net/itnavi-blog/2020/06/Ng%C3%B4n-ng%E1%BB%AF-l%E1%BA%ADp-tr%C3%ACnh-C-5.jpg"  alt="Ngôn ngữ lập trình C" width="250" height="150">
                 <div id="modalContainer" class="modal-overlay"></div>
                 <script>
@@ -85,8 +84,6 @@
                     }
                   </script>
                   
-            <p>Khóa học này sẽ giúp bạn nắm vững các khái niệm cơ bản về lập trình C, từ các cấu trúc điều khiển đến việc quản lý bộ nhớ.</p>
-            <button>Thêm vào giỏ hàng</button>
             <p>Khóa học này sẽ giúp bạn nắm vững các khái niệm cơ bản về lập trình C, từ các cấu trúc điều khiển đến việc quản lý bộ nhớ.</p>
             <button>Thêm vào giỏ hàng</button>
         </div>
@@ -146,9 +143,49 @@
         </div>
         <!-- Course 11 -->
         <div class="course-card">
-            <h3>Khóa học Docker cơ bản</h3>
-            <p>Khóa học này giới thiệu Docker, công cụ giúp bạn xây dựng và triển khai ứng dụng dễ dàng và nhanh chóng.</p>
-            <button>Thêm vào giỏ hàng</button>
+           <h3>Khóa học Docker cơ bản</h3>
+                <img onclick="moModalDocker()"
+                    src="https://ayeshalshukri.co.uk/category/guides/docker-error-failed-to-solve-with-frontend-dockerfile/DockerDeployment.png" alt="Docker Course"
+                    width="300" height="150">
+                <div id="modalContainerDocker" class="modal-overlay"></div>
+                <script>
+                    function moModalDocker() {
+                        fetch('Docker.html')
+                            .then(response => response.text())
+                            .then(data => {
+                                const modalContainer = document.getElementById('modalContainerDocker');
+                                const temp = document.createElement('div');
+                                temp.innerHTML = data;
+                                const scripts = temp.querySelectorAll('script');
+                                modalContainer.innerHTML = temp.innerHTML;
+
+                                scripts.forEach(oldScript => {
+                                    const newScript = document.createElement('script');
+                                    if (oldScript.src) {
+                                        newScript.src = oldScript.src;
+                                    } else {
+                                        newScript.textContent = oldScript.textContent;
+                                    }
+                                    document.body.appendChild(newScript);
+                                });
+
+                                modalContainer.style.display = 'flex';
+                            });
+                    }
+
+                    function dongModalDocker() {
+                        document.getElementById('modalContainerDocker').style.display = 'none';
+                    }
+                    window.onclick = function (event) {
+                        const modalContainer = document.getElementById('modalContainerDocker');
+                        if (event.target == modalContainer) {
+                            dongModalDocker();
+                        }
+                    }
+                </script>
+            
+                <p>Khóa học này giới thiệu Docker, công cụ giúp bạn xây dựng và triển khai ứng dụng dễ dàng và nhanh chóng.</p>
+                <button>Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 12 -->
         <div class="course-card">
