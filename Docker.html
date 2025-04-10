@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            font-size: 12px;
+            line-height: 1.2;
+        }
+
+        .modal-header {
+            text-align: right;
+            padding: 5px 10px;
+        }
+
+        #btn-close {
+            margin-right: 12px;
+            border: none;
+            background: none;
+            font-size: 19px;
+            cursor: pointer;
+            position: fixed;
+            z-index: 999;
+        }
+
+        #modal-container {
+            background-color: #fff;
+            color: black;
+            border-radius: 10px;
+            padding: 10px;
+            width: 700px;
+            height: 600px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+
+        #modal-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .course-main {
+            background-color: #0e2a47;
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            flex: 2;
+            position: relative;
+        }
+
+        .course-title {
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .course-description {
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .author-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .author {
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .student-count {
+            margin-left: 10px;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-right: 10px;
+        }
+
+        .course-image {
+            margin: 10px;
+            text-align: center;
+            width: 95%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.646);
+        }
+
+        .course-sidebar {
+            background-color: #2d4763;
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1;
+            color: white;
+        }
+
+        .price {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        .discount {
+            background-color: #ffeaea;
+            color: #e74c3c;
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 8px;
+            margin-left: 10px;
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            margin: 20px 0;
+        }
+
+        .course-stats {
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stat-icon {
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .btn-try {
+            background-color: #4c6ef5;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-buy {
+            background-color: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        h1 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .course-1 {
+            padding: 20px;
+        }
+
+        .boder-bottom {
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .section {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.section-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+}
+
+.section-icon {
+    margin-right: 10px;
+    transition: transform 0.3s;
+}
+
+.rotate {
+    transform: rotate(90deg);
+}
+
+.section-content {
+    background-color: white;
+    border-top: 1px solid #e0e0e0;
+    display: none;
+}
+
+.lecture {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.lecture:last-child {
+    border-bottom: none;
+}
+
+.lecture-title {
+    display: flex;
+    align-items: center;
+}
+
+.lecture-icon {
+    margin-right: 10px;
+}
+
+.preview-link {
+    margin-right: 20px;
+    color: #7B1FA2;
+    text-decoration: none;
+}
+
+.purple-link {
+    text-decoration: none;
+    color: #7B1FA2;
+}
+    </style>
+    <title>Docker Course</title>
+</head>
+
+<body>
+    <div class="modal-content" id="modal-container">
+        <div class="modal-header">
+            <button onclick="dongModal()" id="btn-close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="container">
+            <div class="course-main">
+                <h1 class="course-title">Docker Cơ Bản</h1>
+                <p class="course-description">
+                    Khóa học này cung cấp kiến thức cơ bản về Docker, giúp bạn hiểu cách tạo, triển khai và quản lý các
+                    container ứng dụng.
+                </p>
+                <div class="tags">
+                    <span class="tag">docker</span>
+                    <span class="tag">containers</span>
+                    <span class="tag">devops</span>
+                </div>
+                <div class="author-info">
+                    <div class="author">
+                        <span>Tác giả CodeWithMe</span>
+                        <span class="student-count">3200 Học viên</span>
+                    </div>
+                    <div class="rating">
+                        <div class="stars">★★★★★</div>
+                        <span>4.8</span>
+                    </div>
+                </div>
+                <img src="https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png"
+                    alt="Docker Course" class="course-image">
+            </div>
+            <div class="course-sidebar">
+                <div class="price">599.000đ <span class="discount">-20%</span></div>
+                <div class="original-price">749.000đ</div>
+
+                <h3 class="sidebar-title">Thông tin khóa học</h3>
+                <div class="course-stats">
+                    <div class="stat-item">
+                        <span class="stat-icon">⏱️</span>
+                        <span>25 giờ học</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🎥</span>
+                        <span>30 video</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">📄</span>
+                        <span>5 tài liệu tham khảo</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🔄</span>
+                        <span>Truy cập trọn đời</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-icon">🏆</span>
+                        <span>Chứng chỉ hoàn thành</span>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <div class="btn-try">Học thử</div>
+                    <div class="btn-buy">Mua ngay</div>
+                </div>
+            </div>
+        </div>
+        <div class="course-1">
+            <h1>Giới thiệu về Docker</h1>
+            <div class="boder-bottom"></div>
+            <h2>Docker là gì?</h2>
+            <p>Docker là một nền tảng mã nguồn mở giúp bạn xây dựng, triển khai và quản lý các ứng dụng trong các
+                container.</p>
+            <p>Container là một môi trường nhẹ, độc lập, và có thể tái sử dụng để chạy các ứng dụng.</p>
+            <div class="boder-bottom"></div>
+            <h2>Tại sao nên học Docker?</h2>
+            <ul>
+                <li>Docker giúp bạn triển khai ứng dụng nhanh chóng và dễ dàng.</li>
+                <li>Docker đảm bảo tính nhất quán giữa các môi trường phát triển, kiểm thử và sản xuất.</li>
+                <li>Docker được sử dụng rộng rãi trong các dự án DevOps và CI/CD.</li>
+            </ul>
+        </div>
+    <div class="course-1">
+        <h1 class="course-header">Nội dung khóa học</h1>
+    
+        <div class="course-info">
+            <a href="#" class="expand-all" id="expandAllBtn">Mở rộng tất cả các phần</a>
+        </div>
+    
+        <!-- Section 1 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">
+                    <span class="section-icon">▶</span>
+                    <h4>Giới thiệu tổng quan</h4>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="lecture">
+                    <div class="lecture-title">
+                        <span class="lecture-icon">▶</span>
+                        <a href="#" class="purple-link">Docker bắt đầu</a>
+                    </div>
+                    <div>
+                        <a href="#" class="preview-link">Xem trước</a>
+                    </div>
+                </div>
+                <div class="lecture">
+                    <div class="lecture-title">
+                        <span class="lecture-icon">▶</span>
+                        <a href="#" class="purple-link">Cài đặt Docker</a>
+                    </div>
+                    <div>
+                        <a href="#" class="preview-link">Xem trước</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Section 2 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">
+                    <span class="section-icon">▶</span>
+                    <h4>Các lệnh cơ bản trong Docker</h4>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="lecture">
+                    <div class="lecture-title">
+                        <span class="lecture-icon">▶</span>
+                        <a href="#" class="purple-link">docker run</a>
+                    </div>
+                </div>
+                <div class="lecture">
+                    <div class="lecture-title">
+                        <span class="lecture-icon">▶</span>
+                        <a href="#" class="purple-link">docker build</a>
+                    </div>
+                </div>
+                <div class="lecture">
+                    <div class="lecture-title">
+                        <span class="lecture-icon">▶</span>
+                        <a href="#" class="purple-link">docker ps</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Section 3 -->
+        <div class="section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <div class="section-title">
+                    <span class="section-icon">▶</span>
+                    <h4>Quản lý Docker Images</h4>
+                </div>
+            </div>
+            <div class="section-content">
+                <div class="lecture">
+                    <div class="lecture-title">
+                        <span class="lecture-icon">▶</span>
+                        <a href="#" class="purple-link">Tạo Docker Images</a>
+                    </div>
+                </div>
+                <div class="lecture">
+                    <div class="lecture-title">
+                        <span class="lecture-icon">▶</span>
+                        <a href="#" class="purple-link">Xóa Docker Images</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+        <script>
+            function toggleSection(element) {
+                const content = element.nextElementSibling;
+                const icon = element.querySelector('.section-icon');
+
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                    icon.classList.remove('rotate');
+                    icon.textContent = '▶';
+                } else {
+                    content.style.display = 'block';
+                    icon.classList.add('rotate');
+                    icon.textContent = '▼';
+                }
+            }
+
+            document.getElementById('expandAllBtn').addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const allSections = document.querySelectorAll('.section-content');
+                const allIcons = document.querySelectorAll('.section-icon');
+                const expandBtn = document.getElementById('expandAllBtn');
+
+
+                let allExpanded = true;
+                for (const section of allSections) {
+                    if (section.style.display !== 'block') {
+                        allExpanded = false;
+                        break;
+                    }
+                }
+
+                if (allExpanded) {
+
+                    for (let i = 0; i < allSections.length; i++) {
+                        allSections[i].style.display = 'none';
+                        allIcons[i].classList.remove('rotate');
+                        allIcons[i].textContent = '▶';
+                    }
+                    expandBtn.textContent = 'Mở rộng tất cả các phần';
+                } else {
+
+                    for (let i = 0; i < allSections.length; i++) {
+                        allSections[i].style.display = 'block';
+                        allIcons[i].classList.add('rotate');
+                        allIcons[i].textContent = '▼';
+                    }
+                    expandBtn.textContent = 'Thu gọn tất cả các phần';
+                }
+            });
+
+
+            window.onload = function () {
+                const firstSection = document.querySelector('.section-header');
+                toggleSection(firstSection);
+            };
+        </script>
+        
+        <div class="course-1">
+            <h2>Giảng Viên</h2>
+            <h3 style="color: #1159a7;">Ths LÊ DUY KHÁNH</h3>
+            <div class="info">
+                <div class="logo1">
+                    <img src="https://fda.neu.edu.vn/wp-content/uploads/2024/11/khanhleduy.jpg" alt="Avatar" width="150"
+                        height="180">
+                </div>
+                <div class="info-main">
+                    <p><b>GIẢNG DẠY</b></p>
+                    <p>Ngôn ngữ lập trình C/C++, Java, Python, JavaScript</p>
+                    <p>Lập trình hướng đối tượng</p>
+                    <p>Cơ sở dữ liệu</p>
+                    <p>Thiết kế và lập trình web</p>
+                    <p>Phát triển ứng dụng di động</p>
+                </div>
+            </div>
+        </div>
+        <p style="padding-left: 40px;">Thành viên nhóm Nghiên cứu và Chuyển giao Công nghệ Khoa Khoa học dữ liệu và Trí tuệ
+            nhân tạo, Trường Công nghệ, Trường Đại học kinh tế Quốc dân.</p>
+        <p style="padding-left: 40px;">Tốt nghiệp Đại học ngành Công nghệ thông tin tại trường Đại học Công nghệ – ĐHQGHN,
+            (Năm 2020).
+            Tốt nghiệp Thạc sĩ ngành Khoa học Máy Tính tại trường Đại học Phenikaa, (Năm 2024).</p>
+        <p style="padding-left: 40px;">Email: khanhld@neu.edu.vn</p>
+        <p style="padding-left: 40px;">Địa điểm: P1601, nhà A1, Trường Công nghệ, Trường Đại học Kinh tế Quốc dân, 207 Giải
+            Phóng, Quận Hai Bà Trưng, Hà Nội.</p>
+        </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
