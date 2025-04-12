@@ -178,12 +178,55 @@
                 <button>Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 12 -->
-        <div class="course-card">
-            <h3>Khóa học Dữ liệu lớn với Hadoop</h3>
-            <p>Khóa học này dạy bạn cách xử lý và phân tích dữ liệu lớn sử dụng Hadoop, một trong những công cụ phổ biến nhất hiện nay.</p>
-            <button>Thêm vào giỏ hàng</button>
+       <div class="course-card">
+    <h3>Khóa học Dữ liệu lớn với Hadoop</h3>
+    <img onclick="moModalHadoop()" src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Hadoop_logo.svg"
+        alt="Hadoop Course" width="300" height="150">
+    <div id="modalContainerHadoop" class="modal-overlay"></div>
+    <script>
+        function moModalHadoop() {
+            fetch('hadoop.html')
+                .then(response => response.text())
+                .then(data => {
+                    const modalContainer = document.getElementById('modalContainerHadoop');
+                    const temp = document.createElement('div');
+                    temp.innerHTML = data;
+                    const scripts = temp.querySelectorAll('script');
+                    modalContainer.innerHTML = temp.innerHTML;
+
+                    // Gắn từng script lại vào DOM để chúng được thực thi
+                    scripts.forEach(oldScript => {
+                        const newScript = document.createElement('script');
+                        if (oldScript.src) {
+                            newScript.src = oldScript.src;
+                        } else {
+                            newScript.textContent = oldScript.textContent;
+                        }
+                        document.body.appendChild(newScript);
+                    });
+
+                    modalContainer.style.display = 'flex';
+                });
+        }
+
+        function dongModalHadoop() {
+            document.getElementById('modalContainerHadoop').style.display = 'none';
+        }
+
+        // Đóng modal khi nhấn ra ngoài
+        window.onclick = function (event) {
+            const modalContainer = document.getElementById('modalContainerHadoop');
+            if (event.target == modalContainer) {
+                dongModalHadoop();
+            }
+        }
+    </script>
+
+    <p>Khóa học này dạy bạn cách xử lý và phân tích dữ liệu lớn sử dụng Hadoop, một trong những công cụ phổ biến nhất
+        hiện nay.</p>
+    <button>Thêm vào giỏ hàng</button>
+</div>
         </div>
-    </div>
 </main>
 <footer>
     <p>&copy; 2025 CodeWithMe. All rights reserved.</p>
