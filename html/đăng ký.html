@@ -70,8 +70,10 @@
                 if (snapshot.exists()) {
                     alert("Tên đăng nhập đã tồn tại!");
                 } else {
+                     const userId = Date.now(); // ID tự động
                     // Lưu dữ liệu
                     set(ref(db, `users/${username}`), {
+                        id: userId,
                         username: username,
                         password: password
                     })
