@@ -17,8 +17,8 @@
             <a href="#">Người đóng góp</a>
             <a href="#">Giỏ hàng</a>
             <span id="userArea">
-            <a href="html/đăng%20nhập.html" id="loginLink">Đăng nhập</a>
-            <a href="html/đăng%20ký.html" id="registerLink">Đăng ký</a>
+            <a href="đăng nhập.html" id="loginLink">Đăng nhập</a>
+            <a href="đăng ký.html" id="registerLink">Đăng ký</a>
             </span>
 
 
@@ -201,6 +201,8 @@
     <script>
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     const currentUser = localStorage.getItem("currentUser");
+    const currentUserId = localStorage.getItem("currentUserId");
+
 
     if (isLoggedIn === "true" && currentUser) {
         const userArea = document.getElementById("userArea");
