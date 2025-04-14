@@ -200,23 +200,161 @@
 </footer>
     <script>
     const isLoggedIn = localStorage.getItem("isLoggedIn");
-    const currentUser = localStorage.getItem("currentUser");
-    const currentUserId = localStorage.getItem("currentUserId");
+const currentUser = localStorage.getItem("currentUser");
 
-
-    if (isLoggedIn === "true" && currentUser) {
-        const userArea = document.getElementById("userArea");
-        userArea.innerHTML = `
-            <span>Xin chào, <strong>${currentUser}</strong></span>
-            <a href="#" id="logoutLink">Đăng xuất</a>
-        `;
-
-        document.getElementById("logoutLink").addEventListener("click", function () {
-            localStorage.removeItem("isLoggedIn");
-            localStorage.removeItem("currentUser");
-            location.reload(); // Tải lại trang để quay về giao diện chưa đăng nhập
-        });
-    }
+if (isLoggedIn === "true" && currentUser) {
+    const userArea = document.getElementById("userArea");
+    
+    userArea.innerHTML = `
+        <div class="account">
+            <div class="profile">
+                <img src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-user-icon-png-image_1796659.jpg" alt="" >
+            </div>
+            <div class="menu1">
+                <ul>
+                    <li>
+                        <i class="fa-solid fa-book"></i>
+                        <a href="#">Lịch sử mua hàng</a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <a href="#">Lớp của tôi</a>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <a href="#" id="logoutLink">Thoát</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    `;
+    
+    // Thêm CSS cho khu vực người dùng
+    const style = document.createElement('style');
+    style.textContent = `
+        #userArea {
+            margin-left: 10px;
+        }
+        .account {
+            
+            position: relative;
+            top: 20px;
+        }
+        
+        .profile {
+            position: absolute;
+            top: 0;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            
+        }
+        
+        .profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .menu1 {
+            position: absolute;
+            width: 260px;
+            background-color: white;
+            top: 75px;
+            right: 15px;
+            border-radius: 20px;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.3s;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .menu1.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .menu1::before {
+            content: "";
+            background-color: white;
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            top: -8px;
+            right: 35px;
+            transform: rotate(45deg);
+        }
+        
+        .menu1 ul {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 0;
+            list-style-type: none;
+        }
+        
+        .menu1 ul li {
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+            background: #fff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .menu1 ul li:last-child {
+            border-bottom: none;
+        }
+        
+        .menu1 ul li:hover {
+            background: #e7e7e7;
+        }
+        
+        .menu1 ul li i {
+            color: #b4b4b4;
+            font-size: 1.1rem;
+            transition: all 0.5s ease;
+        }
+        
+        .menu1 ul li:hover i {
+            color: #333;
+        }
+        
+        .menu1 ul li a {
+            font-size: 1.1rem;
+            color: #292929;
+            margin-left: 20px;
+            text-decoration: none;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Xử lý sự kiện đăng xuất
+    document.getElementById("logoutLink").addEventListener("click", function (e) {
+        e.preventDefault();
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("currentUser");
+        location.reload(); // Tải lại trang để quay về giao diện chưa đăng nhập
+    });
+    
+    // Xử lý hiển thị/ẩn menu khi nhấp vào ảnh hồ sơ
+    const profileElement = document.querySelector('.profile');
+    const menuElement = document.querySelector('.menu1');
+    
+    profileElement.addEventListener('click', function(e) {
+        e.stopPropagation();
+        menuElement.classList.toggle('active');
+    });
+    
+    // Đóng menu khi nhấp vào bất kỳ đâu bên ngoài
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.profile') && !event.target.closest('.menu1')) {
+            menuElement.classList.remove('active');
+        }
+    });
+}
 </script>
 </body>
 </html>
