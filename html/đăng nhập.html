@@ -21,7 +21,7 @@
                 <button type="submit">Đăng Nhập</button>
             </div>
         </form>
-        <p>Chưa có tài khoản? <a href="../đăng%20ký.html">Đăng ký ngay</a></p>
+        <p>Chưa có tài khoản? <a href="đăng ký.html">Đăng ký ngay</a></p>
     </div>
 
     <script type="module">
@@ -61,7 +61,7 @@
                         localStorage.setItem("isLoggedIn", "true");
                         localStorage.setItem("currentUser", username);
                         localStorage.setItem("currentUserId", userData.id);
-                        window.location.href = "index.html";
+                        window.location.href = "../index.html";
                     } else {
                         alert("Mật khẩu không chính xác!");
                     }
