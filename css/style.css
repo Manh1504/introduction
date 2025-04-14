@@ -33,6 +33,9 @@ header {
     gap: 20px;
     align-items: center;
 }
+#userArea a {
+    margin-left: 10px; 
+}
 .menu a {
     text-decoration: none;
     color: black;
