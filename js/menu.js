@@ -1,4 +1,4 @@
-fetch("menu.html")
+fetch("../html/menu.html")
     .then(res => res.text())
     .then(html => {
         document.getElementById("header-container").innerHTML = html;
@@ -25,8 +25,8 @@ fetch("menu.html")
                 <a href="../index.html">Trang chủ</a>
                 <a href="#">Người đóng góp</a>
                 <a href="#">Giỏ hàng</a>
-                <a href="../đăng%20nhập.html">Đăng nhập</a>
-                <a href="../đăng%20ký.html">Đăng ký</a>
+                <a href="../html/đăng%20nhập.html">Đăng nhập</a>
+                <a href="../html/đăng%20ký.html">Đăng ký</a>
             `;
         }
     });
