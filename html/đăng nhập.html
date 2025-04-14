@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng Nhập</title>
+    <link rel="stylesheet" href="../css/dkdn.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Đăng Nhập</h1>
+
+        <!-- Vùng hiển thị thông báo -->
+        <div id="message" class="message"></div>
+
+        <form id="loginForm">
+            <label for="loginUsername">Tên đăng nhập:</label>
+            <input type="text" id="loginUsername" placeholder="Nhập tên đăng nhập" required>
+
+            <label for="loginPassword">Mật khẩu:</label>
+            <input type="password" id="loginPassword" placeholder="Nhập mật khẩu" required>
+
+            <div class="wrap">
+                <button type="submit">Đăng Nhập</button>
+            </div>
+        </form>
+        <p>Chưa có tài khoản? <a href="đăng%20ký.html">Đăng ký ngay</a></p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
+        const firebaseConfig = {
+            authDomain: "bai-tap-html.firebaseapp.com",
+            databaseURL: "https://bai-tap-html-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "bai-tap-html",
+            storageBucket: "bai-tap-html.appspot.com",
+            messagingSenderId: "1825688805",
+            appId: "1:1825688805:web:0fea5be7f1db7f0339580c",
+            measurementId: "G-0QC28N9X9M"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        function showMessage(msg, type = "error") {
+            const messageDiv = document.getElementById("message");
+            messageDiv.textContent = msg;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = "block";
+
+            // Tự ẩn sau 3 giây
+            setTimeout(() => {
+                messageDiv.style.display = "none";
+            }, 3000);
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById("loginUsername").value.trim();
+            const password = document.getElementById("loginPassword").value.trim();
+
+            if (!username || !password) {
+                showMessage("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
+
+            try {
+                const snapshot = await get(child(ref(db), `users/${username}`));
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    if (userData.password === password) {
+                        showMessage("Đăng nhập thành công!", "success");
+                        localStorage.setItem("isLoggedIn", "true");
+                        localStorage.setItem("currentUser", username);
+                        localStorage.setItem("currentUserId", userData.id);
+                        setTimeout(() => {
+                            window.location.href = "../index.html";
+                        }, 1000); // Chờ hiển thị thông báo rồi chuyển trang
+                    } else {
+                        showMessage("Mật khẩu không chính xác!");
+                    }
+                } else {
+                    showMessage("Tên đăng nhập không tồn tại!");
+                }
+            } catch (error) {
+                console.error("Lỗi đăng nhập:", error);
+                showMessage("Đã xảy ra lỗi khi đăng nhập.");
+            }
+        });
+    </script>
+</body>
+
+</html>

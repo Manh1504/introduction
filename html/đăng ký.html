@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng Ký</title>
+    <link rel="stylesheet" href="../css/dkdn.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Đăng Ký</h1>
+        <form id="registerForm">
+            <label for="regUsername">Tên đăng ký:</label>
+            <input type="text" id="regUsername" placeholder="Nhập tên đăng ký" required>
+
+            <label for="regPassword">Mật khẩu:</label>
+            <input type="password" id="regPassword" placeholder="Nhập mật khẩu" required>
+
+            <label for="confirmPassword">Xác nhận mật khẩu:</label>
+            <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+
+            <div class="wrap">
+                <button type="submit">Đăng Ký</button>
+            </div>
+        </form>
+        <div id="messageBox" class="message"></div>
+        <p>Đã có tài khoản? <a href="đăng%20nhập.html">Đăng nhập ngay</a></p>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
+        const firebaseConfig = {
+            authDomain: "bai-tap-html.firebaseapp.com",
+            databaseURL: "https://bai-tap-html-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "bai-tap-html",
+            storageBucket: "bai-tap-html.appspot.com",
+            messagingSenderId: "1825688805",
+            appId: "1:1825688805:web:0fea5be7f1db7f0339580c",
+            measurementId: "G-0QC28N9X9M"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        function showMessage(message, type = "error") {
+            const box = document.getElementById("messageBox");
+            box.textContent = message;
+            box.className = `message ${type}`;
+            box.style.display = "block";
+            box.style.opacity = "1";
+            box.style.transform = "scale(1)";
+
+            setTimeout(() => {
+                box.style.opacity = "0";
+                box.style.transform = "scale(0.95)";
+                setTimeout(() => box.style.display = "none", 300);
+            }, 4000);
+        }
+
+        document.getElementById("registerForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById("regUsername").value.trim();
+            const password = document.getElementById("regPassword").value.trim();
+            const confirmPassword = document.getElementById("confirmPassword").value.trim();
+
+            if (!username || !password || !confirmPassword) {
+                showMessage("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showMessage("Mật khẩu xác nhận không khớp!");
+                return;
+            }
+
+            try {
+                const dbRef = ref(db);
+
+                // Kiểm tra tên đăng nhập
+                const snapshot = await get(child(dbRef, `users/${username}`));
+                if (snapshot.exists()) {
+                    showMessage("Tên đăng nhập đã tồn tại!");
+                    return;
+                }
+
+                // Lấy ID hiện tại từ nextUserId
+                const idSnap = await get(child(dbRef, "nextUserId"));
+                let userId = 1;
+                if (idSnap.exists()) {
+                    userId = idSnap.val();
+                }
+
+                // Lưu người dùng
+                await set(ref(db, `users/${username}`), {
+                    id: userId,
+                    username: username,
+                    password: password
+                });
+
+                // Tăng nextUserId
+                await set(ref(db, "nextUserId"), userId + 1);
+
+                showMessage("Đăng ký thành công!", "success");
+                setTimeout(() => {
+                    window.location.href = "../index.html";
+                }, 1500);
+
+            } catch (error) {
+                console.error(error);
+                showMessage("Đăng ký thất bại. Vui lòng thử lại ");
+            }
+        });
+    </script>
+</body>
+
+</html>
