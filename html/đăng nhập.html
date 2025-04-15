@@ -25,7 +25,8 @@
                 <button type="submit">Đăng Nhập</button>
             </div>
         </form>
-        <p>Chưa có tài khoản? <a href="đăng%20ký.html">Đăng ký ngay</a></p>
+        <p id="registerPrompt">Chưa có tài khoản? <a href="đăng%20ký.html">Đăng ký ngay</a></p>
+
     </div>
 
     <script type="module">
@@ -46,16 +47,27 @@
         const db = getDatabase(app);
 
         function showMessage(msg, type = "error") {
-            const messageDiv = document.getElementById("message");
-            messageDiv.textContent = msg;
-            messageDiv.className = `message ${type}`;
-            messageDiv.style.display = "block";
+                const prompt = document.getElementById("registerPrompt");
 
-            // Tự ẩn sau 3 giây
-            setTimeout(() => {
-                messageDiv.style.display = "none";
-            }, 3000);
-        }
+                // Lưu nội dung cũ
+                const originalHTML = prompt.innerHTML;
+
+                // Gán thông báo
+                prompt.innerHTML = `<span class="message ${type}">${msg}</span>`;
+
+                // Hiển thị thông báo
+                const message = prompt.querySelector(".message");
+                message.style.display = "block";
+
+                // Sau 3 giây, ẩn thông báo và khôi phục nội dung ban đầu
+                setTimeout(() => {
+                    message.classList.add("hidden");
+                    setTimeout(() => {
+                        prompt.innerHTML = originalHTML;
+                    }, 300); // Sau khi ẩn đi, chờ một chút rồi khôi phục lại
+                }, 3000);
+            }
+
 
         document.getElementById("loginForm").addEventListener("submit", async function (event) {
             event.preventDefault();
@@ -78,8 +90,13 @@
                         localStorage.setItem("currentUser", username);
                         localStorage.setItem("currentUserId", userData.id);
                         setTimeout(() => {
-                            window.location.href = "../index.html";
-                        }, 1000); // Chờ hiển thị thông báo rồi chuyển trang
+                            if (document.referrer) {
+                                window.location.href = document.referrer; // Quay lại trang trước đó
+                            } else {
+                                window.location.href = "../index.html"; // Nếu không có referrer thì về trang mặc định
+                            }
+                        }, 1000);
+
                     } else {
                         showMessage("Mật khẩu không chính xác!");
                     }
