@@ -11,6 +11,7 @@ if (isLoggedIn && currentUser) {
                 </div>
                 <div class="menu1">
                     <ul>
+                        <li><a href="#"><i class="fa-solid fa-basket-shopping"></i> Giỏ hàng</a></li>
                         <li><a href="#"><i class="fa-solid fa-book"></i> Lịch sử mua hàng</a></li>
                         <li><a href="#"><i class="fa-solid fa-calendar-days"></i> Lớp của tôi</a></li>
                         <li><a href="#" id="logoutLink"><i class="fa-solid fa-right-from-bracket"></i> Thoát</a></li>
@@ -74,7 +75,17 @@ if (isLoggedIn && currentUser) {
                 color: #888;
             }
             .menu1 ul li:hover {
-                background: #f5f5f5;
+                color: crimson;
+            }
+            .menu1 ul li:hover::after {
+                content: '';
+                display: block;
+                width: 0%;
+                height: 2px;
+                background-color: crimson;
+                position: absolute;
+                margin: 5px 0;
+                animation: line .2s ease;
             }
         `;
     document.head.appendChild(style);
