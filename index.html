@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>Code with Me</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cart.css">
 </head>
-<body>
+<body class="">
 <header>
     <div class="header">
         <div class="logo">
@@ -15,16 +16,48 @@
         <div class="menu">
             <a>Trang chủ</a>
             <a href="#">Người đóng góp</a>
-            <a href="#">Giỏ hàng</a>
+            <a href="#">
+                    <div class="container">
+                    <div class="icon-cart">
+                        <svg  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+                        </svg>
+                          <span>0</span>
+                    </div>
+            </div>
+                </a>
             <span id="userArea">
             <a href="html/đăng%20nhập.html" id="loginLink">Đăng nhập</a>
             <a href="html/đăng%20ký.html" id="registerLink">Đăng ký</a>
             </span>
-
-
         </div>
     </div>
 </header>
+<div class="cartTab">
+    <h1>Shopping Cart</h1>
+    <div class="listCart">
+        <div class="item">
+            <div class="image">
+                <img src="images/C++.jpg" alt="">
+            </div>
+            <div class="name">
+                NAME
+            </div>
+            <div class="totalPrice">
+                499.000d
+            </div>
+            <div class="quanity">
+                <span class="minus"><</span>
+                <span>1</span>
+                <span class="plus">></span>
+            </div>
+        </div>
+    </div>
+    <div class="btn">
+        <button class="close">CLOSE</button>
+        <button class="checkOut">CHECK OUT</button>
+    </div>
+</div>
 <main>
     <div class="categories">
         <a href="#" class="ative">Tất cả khóa học</a>
@@ -85,7 +118,7 @@
                   </script>
                   
             <p>Khóa học này sẽ giúp bạn nắm vững các khái niệm cơ bản về lập trình C, từ các cấu trúc điều khiển đến việc quản lý bộ nhớ.</p>
-            <button>Thêm vào giỏ hàng</button>
+            <button class="addCart">Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 2 -->
         <div class="course-card">
@@ -94,7 +127,7 @@
             </a>
             <h3>Khóa học JavaScript cơ bản</h3>
             <p>Khóa học giới thiệu các khái niệm cơ bản của JavaScript, giúp bạn xây dựng các ứng dụng web động và tương tác với người dùng.</p>
-            <button>Thêm vào giỏ hàng</button>
+            <button class="addCart">Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 3 -->
         <div class="course-card">
@@ -103,7 +136,7 @@
             </a>
             <h3>Khóa học Python cơ bản</h3>
             <p>Khóa học này cung cấp các khái niệm cơ bản về Python, lý tưởng cho những người mới bắt đầu học lập trình.</p>
-            <button>Thêm vào giỏ hàng</button>
+            <button class="addCart">Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 4 -->
         <div class="course-card">
@@ -112,43 +145,43 @@
             </a>
             <h3>Khóa học HTML & CSS</h3>
             <p>Khóa học này sẽ dạy bạn cách tạo các trang web đẹp mắt bằng HTML và CSS, từ cơ bản đến nâng cao.</p>
-            <button>Thêm vào giỏ hàng</button>
+            <button class="addCart">Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 5 -->
         <div class="course-card">
             <h3>Khóa học Thuật toán cơ bản</h3>
             <p>Khóa học giúp bạn hiểu rõ về các thuật toán cơ bản như tìm kiếm, sắp xếp và các kỹ thuật tối ưu hóa trong lập trình.</p>
-            <button>Thêm vào giỏ hàng</button>
+            <button class="addCart">Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 6 -->
         <div class="course-card">
             <h3>Khóa học C++ nâng cao</h3>
             <p>Khóa học này đào sâu vào các khái niệm nâng cao trong C++, giúp bạn viết mã hiệu quả và tối ưu hóa ứng dụng.</p>
-            <button>Thêm vào giỏ hàng</button>
+            <button class="addCart">Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 7 -->
         <div class="course-card">
             <h3>Khóa học ReactJS</h3>
             <p>Khóa học ReactJS giúp bạn xây dựng ứng dụng web động và tối ưu hiệu suất với thư viện React.</p>
-            <button>Thêm vào giỏ hàng</button>
+            <button class="addCart">Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 8 -->
         <div class="course-card">
             <h3>Khóa học Node.js</h3>
             <p>Khóa học giới thiệu Node.js, một nền tảng phát triển ứng dụng web server-side với JavaScript.</p>
-            <button>Thêm vào giỏ hàng</button>
+            <button class="addCart">Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 9 -->
         <div class="course-card">
             <h3>Khóa học Machine Learning</h3>
             <p>Khóa học này sẽ giúp bạn hiểu rõ về các thuật toán học máy, từ phân loại đến học sâu.</p>
-            <button>Thêm vào giỏ hàng</button>
+            <button class="addCart">Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 10 -->
         <div class="course-card">
             <h3>Khóa học Web Scraping với Python</h3>
             <p>Khóa học này giúp bạn thu thập dữ liệu từ các trang web và xử lý dữ liệu bằng Python.</p>
-            <button>Thêm vào giỏ hàng</button>
+            <button class="addCart">Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 11 -->
         <div class="course-card">
@@ -194,13 +227,13 @@
                 </script>
             
                 <p>Khóa học này giới thiệu Docker, công cụ giúp bạn xây dựng và triển khai ứng dụng dễ dàng và nhanh chóng.</p>
-                <button>Thêm vào giỏ hàng</button>
+                <button class="addCart">Thêm vào giỏ hàng</button>
         </div>
         <!-- Course 12 -->
         <div class="course-card">
             <h3>Khóa học Dữ liệu lớn với Hadoop</h3>
             <p>Khóa học này dạy bạn cách xử lý và phân tích dữ liệu lớn sử dụng Hadoop, một trong những công cụ phổ biến nhất hiện nay.</p>
-            <button>Thêm vào giỏ hàng</button>
+            <button class="addCart">Thêm vào giỏ hàng</button>
         </div>
     </div>
 </main>
@@ -312,6 +345,6 @@
         });
     }
 </script>
-
+<script src="js/cart.js"></script>
 </body>
 </html>

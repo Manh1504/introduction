@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Special+Gothic&display=swap');
+body{
+  font-family: "Special Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.container{
+  width: auto;
+  margin: auto;
+  text-align: center;
+  padding-top: 10px;
+  transition: transfrom .5s;
+}
+svg{
+  width: 30px;
+}
+
+.icon-cart span{
+  display: flex;
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
+  border-radius: 50%;
+  position: absolute;
+  top: 60%;
+  right: -20x;
+  z-index: 1;
+}
+.icon-cart svg {
+  width: 35px;
+  height: 35px;
+}
+body.showCart .cartTab{
+  inset: 0 0 0 auto;
+}
+body.showCart .container{
+  transform: translate(-250px);
+}
+
+.cartTab{
+  width: 400px;
+  background-color: #353432;
+  color: #eee;
+  position: fixed;
+  top: 0;
+  right: -400px;
+  bottom: 0;
+  left: auto;
+  display: grid;
+  grid-template-rows: 70px 1fr 70px;
+  transition: .5s;
+  z-index: 9999;
+}
+/* Style cho nút xóa */
+.remove-btn {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.remove-btn:hover {
+  background-color: #cc0000;
+}
+
+/* Ẩn phần listProduct không cần thiết */
+.listProduct {
+  display: none;
+}
+.cartTab h1{
+  padding: 20px;
+  margin: 0;
+  font-weight: 300;
+}
+.cartTab .btn{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.cartTab .btn button{
+  background-color: #e8bc0e;
+  border: none;
+  font-family: Poppins;
+  font-weight: 500;
+  cursor: pointer;
+}
+.cartTab .btn .close{
+  background-color: #eee;
+}
+.cartTab .listCart .item img{
+  width: 100%;
+}
+.cartTab .listCart .item{
+  display: grid;
+  grid-template-columns: 70px 150px 50px 1fr;
+  gap: 10px;
+  text-align: center;
+  align-items: center;
+}
+.listCart .quanity span{
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-color: #eee;
+  color: #555;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.listCart .quanity span:nth-child(2){
+  background-color : transparent;
+  color: #eee;
+}
+.listCart .quanity span:nth-child(even){
+  background-color: #eee1;
+}
+.listCart {
+  overflow: auto;
+}
+.listCart ::-webkit-scrollbar{
+  width: 0;
+}
