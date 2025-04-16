@@ -25,7 +25,7 @@
             </div>
         </form>
         <div id="messageBox" class="message"></div>
-        <p>Đã có tài khoản? <a href="đăng%20nhập.html">Đăng nhập ngay</a></p>
+        <p id="registerStatus">Đã có tài khoản? <a href="đăng%20nhập.html">Đăng nhập ngay</a></p>
     </div>
 
     <!-- Firebase SDK -->
@@ -47,18 +47,19 @@
         const db = getDatabase(app);
 
         function showMessage(message, type = "error") {
-            const box = document.getElementById("messageBox");
-            box.textContent = message;
-            box.className = `message ${type}`;
-            box.style.display = "block";
-            box.style.opacity = "1";
-            box.style.transform = "scale(1)";
+            const statusElement = document.getElementById("registerStatus");
 
+            // Thay đổi nội dung và kiểu hiển thị của phần thông báo
+            statusElement.innerHTML = `<span class="message ${type}">${message}</span>`;
+
+            // Đảm bảo thông báo được hiển thị
+            const messageBox = statusElement.querySelector(".message");
+            messageBox.style.display = "inline-block";
+
+            // Sau 3 giây, quay lại dòng chữ cũ
             setTimeout(() => {
-                box.style.opacity = "0";
-                box.style.transform = "scale(0.95)";
-                setTimeout(() => box.style.display = "none", 300);
-            }, 4000);
+                statusElement.innerHTML = `Đã có tài khoản? <a href="đăng%20nhập.html">Đăng nhập ngay</a>`;
+            }, 3000);
         }
 
         document.getElementById("registerForm").addEventListener("submit", async function (e) {
