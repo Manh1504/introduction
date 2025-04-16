@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBORG Gaming</title>
+    <link rel="stylesheet" href="../navbar/navbar.css">
+    <link rel="stylesheet" href="../navbar/style.css">
+    <link rel="stylesheet" href="../navbar/universal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Giữ nguyên navbar như cũ -->
+    <header>
+        <nav style="position: fixed; top: 0; width: 100%;">
+            <div class="nav-bar">
+                <div class="theme-toggle">
+                    <i class="fas fa-moon dark-icon"></i>
+                    <i class="fas fa-sun light-icon"></i>
+                </div>
+                <li class="logo"></li>
+                <span class="menu font-sans">
+                    <li><a href="../index-background.html" class="text-white text-center" href="#home">Home</a></li>
+                    <li><a class="text-white text-center" style="color:#AF4A92" href="Course.html">Courses</a></li>
+                    <li><a class="text-white text-center" href="pages/contact us/contact.html">Contact Us</a></li>
+                    <li><a class="text-white text-center" href="../About Us/AboutUs.html">About Us</a></li>
+                    <li>
+                        <a href="pages/login/login.html">
+                            <button class="btn-design text-bold">Login</button>
+                        </a>
+                    </li>
+                    <label for="check" class="close-menu">
+                        <i class="text-white fas fa-times"></i>
+                    </label>
+                </span>
+            </div>
+            <label for="check" class="open-menu">
+                <i class="text-white fas fa-bars"></i>
+            </label>
+        </nav>
+    </header>
+        
+    <div class="main-container">
+        <!-- Hero Banner -->
+        <section class="hero-banner">
+            <div class="slider-container">
+                <div class="slide active" style="background-image: url('img/anh1.jpg');"></div>
+                <div class="slide" style="background-image: url('img/anh2.jpg');"></div>
+                <div class="slide" style="background-image: url('img/anh3.webp');"></div>
+            </div>
+            <div class="hero-content">
+                <p class="welcome-text">Chào mừng đến với CODEWITHME</p>
+                <h1>CÁC KHOÁ HỌC<br>TÌM KIẾM Ở ĐÂY</h1>
+                <div class="search-container">
+                    <input type="text" placeholder="Search courses..." class="search-input">
+                    <button class="search-button"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </section>
+        <!-- Bảng khoá học -->
+        <section class="courses-section">
+            <h2 class="section-header">Các khoá học</h2>
+            
+            <div class="courses-grid">
+                <!-- Grid 1 khoá học -->
+                <div class="courses-row">
+                    <div class="course-card">
+                        <div class="course-image"></div>
+                        <div class="course-details">
+                            <h3>Python</h3>
+                            <div class="course-stats">
+                                <span class="rating">★ 4.8</span>
+                                <span class="students">2.3M</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card">
+                        <div class="course-image"></div>
+                        <div class="course-details">
+                            <h3>Java</h3>
+                            <div class="course-stats">
+                                <span class="rating">★ 4.8</span>
+                                <span class="students">2.3M</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card">
+                        <div class="course-image"></div>
+                        <div class="course-details">
+                            <h3>HTML & CSS</h3>
+                            <div class="course-stats">
+                                <span class="rating">★ 4.8</span>
+                                <span class="students">2.3M</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card">
+                        <div class="course-image"></div>
+                        <div class="course-details">
+                            <h3>JavaScript</h3>
+                            <div class="course-stats">
+                                <span class="rating">★ 4.8</span>
+                                <span class="students">2.3M</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Grid 2 khoá học -->
+                <div class="courses-row">
+                    <div class="course-card">
+                        <div class="course-image"></div>
+                        <div class="course-details">
+                            <h3>Machine Learning</h3>
+                            <div class="course-stats">
+                                <span class="rating">★ 4.8</span>
+                                <span class="students">2.3M</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card">
+                        <div class="course-image"></div>
+                        <div class="course-details">
+                            <h3>Lập trình C</h3>
+                            <div class="course-stats">
+                                <span class="rating">★ 4.8</span>
+                                <span class="students">2.3M</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card">
+                        <div class="course-image"></div>
+                        <div class="course-details">
+                            <h3>Lập trình C++</h3>
+                            <div class="course-stats">
+                                <span class="rating">★ 4.8</span>
+                                <span class="students">2.3M</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card">
+                        <div class="course-image"></div>
+                        <div class="course-details">
+                            <h3>Lập trình C#</h3>
+                            <div class="course-stats">
+                                <span class="rating">★ 4.8</span>
+                                <span class="students">2.3M</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="courses-row">
+                <div class="course-card">
+                    <div class="course-image"></div>
+                    <div class="course-details">
+                        <h3>Machine Learning</h3>
+                        <div class="course-stats">
+                            <span class="rating">★ 4.8</span>
+                            <span class="students">2.3M</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image"></div>
+                    <div class="course-details">
+                        <h3>Lập trình C</h3>
+                        <div class="course-stats">
+                            <span class="rating">★ 4.8</span>
+                            <span class="students">2.3M</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="course-image"></div>
+                    <div class="course-details">
+                        <h3>Lập trình C++</h3>
+                        <div class="course-stats">
+                            <span class="rating">★ 4.8</span>
+                            <span class="students">2.3M</span>
+                        </div>
+                    </div>
+                </div>
+                <!--Grid 3 khoá học-->
+                <div class="course-card">
+                    <div class="course-image"></div>
+                    <div class="course-details">
+                        <h3>Lập trình C#</h3>
+                        <div class="course-stats">
+                            <span class="rating">★ 4.8</span>
+                            <span class="students">2.3M</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- Các khoá học cơ bản -->
+        <section class="library-section">
+            <h2 class="section-header">Các khoá học nổi tiếng</h2>
+            
+            <div class="library-grid">
+                <div class="library-item">
+                    <div class="course-cover"></div>
+                    <div class="course-info">
+                        <h3>Cấu trúc dữ liệu và giải thuật</h3>
+                        <div class="course-meta">
+                            <p><span>Thể loại:</span>Thuật toán</p>
+                            <p><span>Thời gian học:</span> 20 tiếng</p>
+                            <p><span>Giá tiền:</span> 499000đ</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="library-item">
+                    <div class="course-cover"></div>
+                    <div class="course-info">
+                        <h3>Lập trình C</h3>
+                        <div class="course-meta">
+                            <p><span>Thể loại:</span> Lập trình cơ sở</p>
+                            <p><span>Thời gian học:</span> 30 tiếng</p>
+                            <p><span>Giá tiền:</span> 399000đ</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="library-item">
+                    <div class="course-cover"></div>
+                    <div class="course-info">
+                        <h3>Lập trình C++</h3>
+                        <div class="course-meta">
+                            <p><span>Thể loại:</span> </p>
+                            <p><span>Thời gian học:</span> 35 tiếng</p>
+                            <p><span>Giá tiền:</span> 499000đ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="#" class="view-all">View Your Library</a>
+        </section>
+    </div>
+
+    <footer>
+        <p>Copyright © 2025 CodeWithMe - Bài tập lớn Thiết kế Web.</p>
+        <p></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
