@@ -11,7 +11,12 @@ if (isLoggedIn && currentUser) {
                 </div>
                 <div class="menu1">
                     <ul>
-                        <li><a href="#"><i class="fa-solid fa-basket-shopping"></i> Giỏ hàng</a></li>
+                        <div class="container">
+                        <div class="icon-cart">
+                            <li><a href="#"><i class="fa-solid fa-basket-shopping"></i> Giỏ hàng</a></li>
+                            <span>0</span>
+                         </div>
+                        </div>  
                         <li><a href="#"><i class="fa-solid fa-book"></i> Lịch sử mua hàng</a></li>
                         <li><a href="#"><i class="fa-solid fa-calendar-days"></i> Lớp của tôi</a></li>
                         <li><a href="#" id="logoutLink"><i class="fa-solid fa-right-from-bracket"></i> Thoát</a></li>
