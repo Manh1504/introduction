@@ -27,7 +27,7 @@ if (isLoggedIn && currentUser) {
 
     const style = document.createElement('style');
     style.textContent = `
-            .account {
+             .account {
                 position: relative;
                 margin-left: 10px;
             }
@@ -68,29 +68,45 @@ if (isLoggedIn && currentUser) {
             .menu1 ul li {
                 padding: 12px 16px;
                 border-bottom: 1px solid #eee;
+                position: relative;
+                transition: background-color 0.2s ease;
+                overflow: hidden; 
             }
+
             .menu1 ul li a {
                 text-decoration: none;
                 color: #333;
                 display: flex;
                 align-items: center;
+                transition: color 0.3s ease;
+                position: relative;
+                z-index: 1;
             }
-            .menu1 ul li a i {
-                margin-right: 10px;
-                color: #888;
-            }
-            .menu1 ul li:hover {
+
+            
+
+            .menu1 ul li:hover a {
                 color: crimson;
             }
-            .menu1 ul li:hover::after {
+
+
+            .menu1 ul li:not(:last-child)::after {
                 content: '';
-                display: block;
-                width: 0%;
-                height: 2px;
-                background-color: crimson;
                 position: absolute;
-                margin: 5px 0;
-                animation: line .2s ease;
+                bottom: 0;
+                left: 0;
+                height: 2px;
+                width: 0;
+                background-color: crimson;
+                transition: width 0.3s ease;
+                z-index: 0;
+            }
+
+            .menu1 ul li:not(:last-child):hover::after {
+                width: 100%;
+            }
+            .menu1 ul li:last-child {
+                border-bottom: none;
             }
         `;
     document.head.appendChild(style);
