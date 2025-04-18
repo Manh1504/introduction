@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Code with Me</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="">
+<header>
+    <div class="header">
+        <div class="logo">
+            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" width="80" height="80">
+            <h1>CodeWithMe</h1>
+        </div>
+        <div class="menu">
+            <a>Trang chủ</a>
+            <a href="#">Người đóng góp</a>
+            <span id="userArea">
+                <a href="html/đăng%20nhập.html" id="loginLink">Đăng nhập</a>
+                <a href="html/đăng%20ký.html" id="registerLink">Đăng ký</a>
+            </span>
+        </div>
+    </div>
+</header>
+<div class="cartTab">
+    <h1>Shopping Cart</h1>
+    <div class="listCart">
+        <div class="item">
+            <div class="image">
+                <img src="images/C++.jpg" alt="">
+            </div>
+            <div class="name">
+                NAME
+            </div>
+            <div class="totalPrice">
+                499.000d
+            </div>
+            <div class="quanity">
+                <span class="minus"><</span>
+                <span>1</span>
+                <span class="plus">></span>
+            </div>
+        </div>
+    </div>
+    <div class="btn">
+        <button class="close">CLOSE</button>
+        <button class="checkOut">CHECK OUT</button>
+    </div>
+</div>
+<main>
+    <div class="categories">
+        <a href="#" class="ative">Tất cả khóa học</a>
+        <a href="#">Lập trình cơ sở</a>
+        <a href="#">Thuật toán</a>
+        <a href="#">Kiến thức chuyên sâu</a>
+    </div>
+
+    <!-- List of courses -->
+    <div class="courses">
+        <!-- Course 1 -->
+        <div class="course-card">
+            <h3>Khóa học Lập trình C cơ bản</h3>
+             <img onclick="moModal()" src="https://d3hi6wehcrq5by.cloudfront.net/itnavi-blog/2020/06/Ng%C3%B4n-ng%E1%BB%AF-l%E1%BA%ADp-tr%C3%ACnh-C-5.jpg"  alt="Ngôn ngữ lập trình C" width="250" height="150">
+                <div id="modalContainer" class="modal-overlay"></div>
+                <script>
+                    function moModal() {
+                      fetch('html/NgonnguC.html')
+                        .then(response => response.text())
+                        .then(data => {
+                          const modalContainer = document.getElementById('modalContainer');
+                  
+                          // Tạo element tạm để parse HTML
+                          const temp = document.createElement('div');
+                          temp.innerHTML = data;
+                  
+                          // Lấy tất cả các script
+                          const scripts = temp.querySelectorAll('script');
+                  
+                          // Chèn nội dung vào modal
+                          modalContainer.innerHTML = temp.innerHTML;
+                  
+                          // Gắn từng script lại vào DOM để chúng được thực thi
+                          scripts.forEach(oldScript => {
+                            const newScript = document.createElement('script');
+                            if (oldScript.src) {
+                              newScript.src = oldScript.src;
+                            } else {
+                              newScript.textContent = oldScript.textContent;
+                            }
+                            document.body.appendChild(newScript);
+                          });
+                  
+                          modalContainer.style.display = 'flex';
+                        });
+                    }
+                  
+                    function dongModal() {
+                      document.getElementById('modalContainer').style.display = 'none';
+                    }
+                     // dí ra ngoài thì thoát
+                    window.onclick = function(event) {
+                      const modalContainer = document.getElementById('modalContainer');
+                      if (event.target == modalContainer) {
+                        dongModal();
+                      }
+                    }
+                  </script>
+                  
+            <p>Khóa học này sẽ giúp bạn nắm vững các khái niệm cơ bản về lập trình C, từ các cấu trúc điều khiển đến việc quản lý bộ nhớ.</p>
+            <button class="addCart">Thêm vào giỏ hàng</button>
+        </div>
+        <!-- Course 2 -->
+        <div class="course-card">
+            <a href="html/java.html">
+                <img src="https://www.commodorebook.com/wp-content/uploads/2020/04/ngon-ngu-java.jpg" alt="Khóa học Java" width="300" height="150">
+            </a>
+            <h3>Khóa học JavaScript cơ bản</h3>
+            <p>Khóa học giới thiệu các khái niệm cơ bản của JavaScript, giúp bạn xây dựng các ứng dụng web động và tương tác với người dùng.</p>
+            <button class="addCart">Thêm vào giỏ hàng</button>
+        </div>
+        <!-- Course 3 -->
+        <div class="course-card">
+            <a href="html/python.html">
+                <img src="http://aptechsaigon.edu.vn/gw-content/images/1608084612-uI4iqdv.jpg" alt="Khóa học python" width="300" height="150">
+            </a>
+            <h3>Khóa học Python cơ bản</h3>
+            <p>Khóa học này cung cấp các khái niệm cơ bản về Python, lý tưởng cho những người mới bắt đầu học lập trình.</p>
+            <button class="addCart">Thêm vào giỏ hàng</button>
+        </div>
+        <!-- Course 4 -->
+        <div class="course-card">
+            <a href="html/html&css.html">
+                <img src="https://monamedia.co/wp-content/uploads/2020/05/html-va-css.jpg" alt="Khóa học html&css" width="300" height="150">
+            </a>
+            <h3>Khóa học HTML & CSS</h3>
+            <p>Khóa học này sẽ dạy bạn cách tạo các trang web đẹp mắt bằng HTML và CSS, từ cơ bản đến nâng cao.</p>
+            <button class="addCart">Thêm vào giỏ hàng</button>
+        </div>
+        <!-- Course 5 -->
+        <div class="course-card">
+            <h3>Khóa học Thuật toán cơ bản</h3>
+            <p>Khóa học giúp bạn hiểu rõ về các thuật toán cơ bản như tìm kiếm, sắp xếp và các kỹ thuật tối ưu hóa trong lập trình.</p>
+            <button class="addCart">Thêm vào giỏ hàng</button>
+        </div>
+        <!-- Course 6 -->
+        <div class="course-card">
+            <h3>Khóa học C++ nâng cao</h3>
+            <p>Khóa học này đào sâu vào các khái niệm nâng cao trong C++, giúp bạn viết mã hiệu quả và tối ưu hóa ứng dụng.</p>
+            <button class="addCart">Thêm vào giỏ hàng</button>
+        </div>
+        <!-- Course 7 -->
+        <div class="course-card">
+            <h3>Khóa học ReactJS</h3>
+            <p>Khóa học ReactJS giúp bạn xây dựng ứng dụng web động và tối ưu hiệu suất với thư viện React.</p>
+            <button class="addCart">Thêm vào giỏ hàng</button>
+        </div>
+        <!-- Course 8 -->
+        <div class="course-card">
+            <h3>Khóa học Node.js</h3>
+            <p>Khóa học giới thiệu Node.js, một nền tảng phát triển ứng dụng web server-side với JavaScript.</p>
+            <button class="addCart">Thêm vào giỏ hàng</button>
+        </div>
+        <!-- Course 9 -->
+        <div class="course-card">
+            <h3>Khóa học Machine Learning</h3>
+            <p>Khóa học này sẽ giúp bạn hiểu rõ về các thuật toán học máy, từ phân loại đến học sâu.</p>
+            <button class="addCart">Thêm vào giỏ hàng</button>
+        </div>
+        <!-- Course 10 -->
+        <div class="course-card">
+            <h3>Khóa học Web Scraping với Python</h3>
+            <p>Khóa học này giúp bạn thu thập dữ liệu từ các trang web và xử lý dữ liệu bằng Python.</p>
+            <button class="addCart">Thêm vào giỏ hàng</button>
+        </div>
+        <!-- Course 11 -->
+        <div class="course-card">
+           <h3>Khóa học Docker cơ bản</h3>
+                <img onclick="moModalDocker()"
+                    src="https://ayeshalshukri.co.uk/category/guides/docker-error-failed-to-solve-with-frontend-dockerfile/DockerDeployment.png" alt="Docker Course"
+                    width="300" height="150">
+                <div id="modalContainerDocker" class="modal-overlay"></div>
+                <script>
+                    function moModalDocker() {
+                        fetch('html/Docker.html')
+                            .then(response => response.text())
+                            .then(data => {
+                                const modalContainer = document.getElementById('modalContainerDocker');
+                                const temp = document.createElement('div');
+                                temp.innerHTML = data;
+                                const scripts = temp.querySelectorAll('script');
+                                modalContainer.innerHTML = temp.innerHTML;
+
+                                scripts.forEach(oldScript => {
+                                    const newScript = document.createElement('script');
+                                    if (oldScript.src) {
+                                        newScript.src = oldScript.src;
+                                    } else {
+                                        newScript.textContent = oldScript.textContent;
+                                    }
+                                    document.body.appendChild(newScript);
+                                });
+
+                                modalContainer.style.display = 'flex';
+                            });
+                    }
+
+                    function dongModalDocker() {
+                        document.getElementById('modalContainerDocker').style.display = 'none';
+                    }
+                    window.onclick = function (event) {
+                        const modalContainer = document.getElementById('modalContainerDocker');
+                        if (event.target == modalContainer) {
+                            dongModalDocker();
+                        }
+                    }
+                </script>
+            
+                <p>Khóa học này giới thiệu Docker, công cụ giúp bạn xây dựng và triển khai ứng dụng dễ dàng và nhanh chóng.</p>
+                <button class="addCart">Thêm vào giỏ hàng</button>
+        </div>
+        <!-- Course 12 -->
+        <div class="course-card">
+            <h3>Khóa học Dữ liệu lớn với Hadoop</h3>
+            <p>Khóa học này dạy bạn cách xử lý và phân tích dữ liệu lớn sử dụng Hadoop, một trong những công cụ phổ biến nhất hiện nay.</p>
+            <button class="addCart">Thêm vào giỏ hàng</button>
+        </div>
+    </div>
+</main>
+<footer>
+    <p>&copy; 2025 CodeWithMe. All rights reserved.</p>
+</footer>
+<script src="js/profile.js"></script>
+<script src="../js/cart.js"></script>
+</body>
+</html>

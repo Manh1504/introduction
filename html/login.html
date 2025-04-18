@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Signup</title>
+    <link rel="stylesheet" href="../css/login.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    
+</head>
+
+<body>
+    <div class="container">
+        <input type="checkbox" id="flip" />
+
+        <div class="cover">
+            <div class="front">
+                <img src="../images/login.jpg"  />
+                
+            </div>
+            <div class="back">
+                <img class="backImg" src="../images/oldfriend.jpg" />
+                >
+            </div>
+        </div>
+
+        <div class="forms">
+            <div class="form-content">
+                <!-- Form Đăng nhập -->
+                <div class="login-form">
+                    <div class="title">Login</div>
+                    <form id="login-form">
+                        <div class="input-boxes">
+                            <div class="input-box">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="login-username" placeholder="Enter your username" required />
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="login-password" placeholder="Enter your password" required />
+                                <i class="fas fa-eye toggle-password" toggle="#login-password"></i>
+                            </div>
+                            <div class="forgot-password">
+                                <a href="#">Forgot password?</a>
+                            </div>
+                            
+                            <div class="button input-box">
+                                <input type="submit" value="Login" />
+                            </div>
+
+                            <!-- Nút đăng nhập Google -->
+                            <div class="google-login" style="text-align: center; margin-top: 10px">
+                                <button type="button" id="google-login-btn"
+                                    style="padding: 8px 16px; border: none; background: #db4437; color: white; border-radius: 4px; cursor: pointer">
+                                    <i class="fab fa-google"></i> Login with Google
+                                </button>
+                                <button type="button" id="facebook-login-btn"
+                                    style="padding: 8px 16px; border: none; background: #2605e3; color: white; border-radius: 4px; cursor: pointer">
+                                    <i class="fab fa-facebook"></i> Login with Google
+                                </button>
+                            </div>
+                            
+
+                            <div class="text sign-up-text">
+                                Don't have an account? <label for="flip">Signup now</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Form Đăng ký -->
+                <div class="signup-form">
+                    <div class="title">Signup</div>
+                    <form id="signup-form">
+                        <div class="input-boxes">
+                            <div class="input-box">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="signup-username" placeholder="Enter your username" required />
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="signup-password" placeholder="Enter your password"
+                                    required />
+                                    <i class="fas fa-eye toggle-password" toggle="#signup-password"></i>
+                            </div>
+                            <div class="input-box">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="signup-confirm-password" placeholder="Confirm your password"
+                                    required />
+                                <i class="fas fa-eye toggle-password" toggle="#signup-confirm-password"></i>
+                            </div>
+                            <div class="button input-box">
+                                <input type="submit" value="Signup" />
+                            </div>
+                            <div class="text sign-up-text">
+                                Already have an account? <label for="flip">Login now</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thông báo popup -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Firebase + Script -->
+    <script src="../js/login.js" defer type="module"></script>
+    
+</body>
+<video autoplay muted loop id="bg-video">
+    <source src="../images/login.mp4" type="video/mp4" />
+    Trình duyệt của bạn không hỗ trợ video.
+</video>
+<audio id="bgMusic" autoplay loop>
+    <source src="../images/thap drill tu do - nghiem tong prod. gaz.mp3" type="audio/mpeg">   
+</audio>
+
+</html>
