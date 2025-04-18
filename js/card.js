@@ -17,10 +17,10 @@ function gotoPage5(page) {
     window.location.href="../html/html&css.html";
 }
 function gotoPage6(page) {
-    window.location.href="../html/reactjs.html";
+    window.location.href="../html/cautrucdulieu.html";
 }
 function gotoPage7(page) {
-    window.location.href="../html/nodejs.html";
+    window.location.href="../html/deeplearning.html";
 }
 function gotoPage8(page) {
     window.location.href="../html/machinelearning.html";

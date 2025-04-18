@@ -151,11 +151,13 @@ body {
 }
 
 .course-cover {
-    width: 80px;
-    height: 100px;
-    background: linear-gradient(45deg, #3A1C71, #D76D77);
-    border-radius: 5px;
     flex-shrink: 0;
+}
+.course-cover img {
+    width: 120px;
+    height: 80px;
+    border-radius: 5px;
+    margin-top: 25px;
 }
 
 .course-info h3 {
