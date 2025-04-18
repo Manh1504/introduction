@@ -205,3 +205,12 @@ document.getElementById("facebook-login-btn").addEventListener("click", function
             showNotification("Đăng nhập Facebook thất bại: " + error.message, "error");
         });
 });
+document.querySelectorAll('.toggle-password').forEach(icon => {
+    icon.addEventListener('click', function () {
+        const input = document.querySelector(this.getAttribute('toggle'));
+        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+        input.setAttribute('type', type);
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+});

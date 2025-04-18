@@ -18,7 +18,7 @@ if (isLoggedIn && currentUser) {
                          </div>
                         </div>  
                         <li><a href="#"><i class="fa-solid fa-book"></i> Lịch sử mua hàng</a></li>
-                        <li><a href="#"><i class="fa-solid fa-calendar-days"></i> Lớp của tôi</a></li>
+                        <li><a href="../html/order.html"><i class="fa-solid fa-calendar-days"></i> Lớp của tôi</a></li>
                         <li><a href="#" id="logoutLink"><i class="fa-solid fa-right-from-bracket"></i> Thoát</a></li>
                     </ul>
                 </div>
