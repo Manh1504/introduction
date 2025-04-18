@@ -34,4 +34,3 @@ function gotoPage10(page) {
 function gotoPage11(page) {
     window.location.href="../html/hadoop.html";
 }
-
