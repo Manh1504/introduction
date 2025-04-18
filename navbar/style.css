@@ -1,79 +1,157 @@
 @import url('https://fonts.googleapis.com/css2?family=Lacquer&display=swap');
-body{
-    margin: 0;
-    font-size: 15px;
-    font-family: Poppins;
+
+body {
+  margin: 0;
+  font-size: 15px;
+  font-family: Poppins;
 }
-header{
-    width: 1300px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
+
+header {
+  width: 1300px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
-header .logo img{
-    height: 40px;
+
+header .logo img {
+  height: 40px;
 }
-header nav{
-    width: 80%;
+
+header nav {
+  width: 80%;
 }
-header nav ul{
-    width: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    list-style: none;
+
+header nav ul {
+  width: 100%;
+
+  justify-content: flex-start;
+  align-items: center;
+  list-style: none;
 }
-header nav ul li{
-    padding: 0 30px;
-    color: #fff;
+
+header nav ul li {
+  padding: 0 30px;
+  color: #fff;
 }
-.banner{
-    margin-top: -50px;
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.banner {
+  margin-top: -50px;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .myVideo {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
-    filter: brightness(0.4);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+  filter: brightness(0.4);
 }
-.content{
-    text-align: center;
-    color: red;
-    text-shadow: 0 10px 50px #630707;
+
+.content {
+  text-align: center;
+  color: red;
+  text-shadow: 0 10px 50px #630707;
 }
-h1{
-    margin: 0;
-    font-size: 6em;
-    animation: animationBlur 5s linear infinite;
+
+h1 {
+  margin: 0;
+  font-size: 6em;
+  animation: animationBlur 5s linear infinite;
 }
-@keyframes animationBlur{
-    0%{
-        filter: blur(0);
-    }80%{
-        filter: blur(0);
-    }
-    90%{
-        filter: blur(5px);
-    }100%{
-        filter: blur(0);
-    }
+
+@keyframes animationBlur {
+  0% {
+    filter: blur(0);
+  }
+
+  80% {
+    filter: blur(0);
+  }
+
+  90% {
+    filter: blur(5px);
+  }
+
+  100% {
+    filter: blur(0);
+  }
 }
-.des{
-    rotate: -5deg;
-    text-align: left;
+
+.des {
+  rotate: -5deg;
+  text-align: left;
 }
+
 .text-bold {
+<<<<<<< HEAD
+  font-weight: 700;
+}
+
+.text-white {
+  color: var(--primary-color);
+}
+
+.banner spline-viewer {
+  transform: scale(1.2);
+}
+
+.banner {
+  overflow: hidden;
+}
+
+.hero {
+  min-height: calc(100vh - 60px);
+  background: url("./images/hero-bcg.jpeg") center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  /* Thêm dòng này để sắp xếp dọc */
+  align-items: center;
+  justify-content: center;
+}
+
+.hero .banner-title {
+  font-size: 3.4rem;
+  text-transform: uppercase;
+  letter-spacing: var(--mainSpacing);
+  margin-bottom: 3rem;
+  color: white;
+}
+
+.hero .banner-btn {
+  padding: 1rem 3rem;
+  text-transform: uppercase;
+  letter-spacing: var(--mainSpacing);
+  font-size: 1rem;
+  background: var(--primaryColor);
+  color: var(--mainBlack);
+  border: 1px solid var(--primaryColor);
+  transition: var(--mainTransition);
+  cursor: pointer;
+}
+
+.hero .banner-btn:hover {
+  background: transparent;
+  color: var(--primaryColor);
+}
+
+:root {
+  --primaryColor: #f09d51;
+  --mainWhite: #fff;
+  --mainBlack: #222;
+  --mainGrey: #ececec;
+  --mainSpacing: 0.1rem;
+  --mainTransition: all 0.3s linear;
+}
+=======
     font-weight: 700;
   }
   
@@ -125,3 +203,4 @@ h1{
     --mainSpacing: 0.1rem;
     --mainTransition: all 0.3s linear;
   }
+>>>>>>> 49f769146e1065483b5ee9b99d4c20023d5f1ba2
