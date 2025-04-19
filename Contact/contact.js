@@ -1,105 +1,118 @@
-let currentUser = null;
-let customerId = null;
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 
-auth.onAuthStateChanged(async (user) => {
-    if (user) {
-        currentUser = user;
-        const snapshot = await database.ref("users/" + user.uid).get();
-        if (snapshot.exists()) {
-            customerId = snapshot.val().customerId;
-            document.getElementById("customerId").value = customerId;
-            loadHistory(currentUser.uid);
-        } else {
-            alert("Không tìm thấy thông tin khách hàng!");
-        }
-    }
-});
+const firebaseConfig = {
+    apiKey: "AIzaSyCn9oE0KbfTnp5JD8VhuXW-y78xUFH-iRg",
+    authDomain: "bai-tap-html.firebaseapp.com",
+    databaseURL: "https://bai-tap-html-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "bai-tap-html",
+    storageBucket: "bai-tap-html.appspot.com",
+    messagingSenderId: "1825688805",
+    appId: "1:1825688805:web:0fea5be7f1db7f0339580c",
+    measurementId: "G-0QC28N9X9M"
+};
 
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// Kiểm tra đăng nhập trước khi gửi yêu cầu
 document.getElementById("care-request-form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!currentUser || !customerId) {
-        alert("Vui lòng đăng nhập trước khi gửi yêu cầu.");
+    e.preventDefault();  // Dừng hành động mặc định của form
+
+    // Kiểm tra người dùng đã đăng nhập chưa
+    checkLogin();
+
+    const userId = localStorage.getItem("currentUserId");
+    const requestType = document.getElementById("requestType").value;
+    const description = document.getElementById("description").value;
+
+    // Kiểm tra nếu các trường dữ liệu còn trống
+    if (!requestType || !description) {
+        alert("Vui lòng điền đầy đủ thông tin yêu cầu!");
         return;
     }
 
-    const requestType = document.getElementById("requestType").value;
-    const description = document.getElementById("description").value;
-    const createdAt = new Date().toISOString();
+    // Tạo idCare tự động
+    const contactsRef = ref(db, 'contacts');
+    const snapshot = await get(contactsRef);
+    let nextId = 1000;
 
-    const snapshot = await database.ref("contacts").once("value");
-    const count = snapshot.exists() ? snapshot.size : 0;
-    const idCare = 1000 + count;
+    if (snapshot.exists()) {
+        const entries = Object.values(snapshot.val());
+        const ids = entries.map(item => parseInt(item.idCare?.replace("care-", "") || 0));
+        const maxId = Math.max(...ids, 999);
+        nextId = maxId + 1;
+    }
 
-    const newContact = {
-        idCare: idCare,
-        userId: currentUser.uid,
-        customerId: customerId,
-        type: requestType,
+    // Tạo yêu cầu chăm sóc mới với các trường {userId, loại yêu cầu, nội dung, trạng thái}
+    const newRequest = {
+        userId: userId,
+        requestType: requestType,
         description: description,
-        status: "pending",
-        createdAt: createdAt
+        status: "Đang xử lý",  // Trạng thái mặc định là "Đang xử lý"
+        timestamp: new Date().toISOString(),  // Thời gian gửi yêu cầu
+        idCare: `care-${nextId}`  // Tạo idCare tự động
     };
 
+    // Lưu yêu cầu vào Firebase
     try {
-        await database.ref("contacts").push(newContact);
-        alert("Gửi yêu cầu thành công!");
+        await set(ref(db, `contacts/${newRequest.idCare}`), newRequest);
+        alert("Yêu cầu của bạn đã được gửi.");
         document.getElementById("care-request-form").reset();
-        loadHistory(currentUser.uid);
+        loadHistory();  // Tải lại lịch sử yêu cầu
     } catch (error) {
-        console.error("Lỗi khi gửi yêu cầu:", error);
-        alert("Gửi yêu cầu thất bại!");
+        console.error("Lỗi khi gửi yêu cầu:", error); // In ra lỗi chi tiết trong console
+        alert("Đã xảy ra lỗi khi gửi yêu cầu: " + error.message);  // Hiển thị lỗi cho người dùng
     }
 });
 
-// Load lịch sử yêu cầu
-async function loadHistory(uid) {
-    const historyBody = document.getElementById("history-body");
-    const noHistoryMessage = document.getElementById("no-history-message");
-    const historyTable = document.getElementById("history-table");
-
-    historyBody.innerHTML = "";
-    noHistoryMessage.style.display = "none";
-    historyTable.style.display = "none";
-
-    const snapshot = await database.ref("contacts").orderByChild("userId").equalTo(uid).once("value");
-
-    if (snapshot.exists()) {
-        snapshot.forEach((child) => {
-            const data = child.val();
-            const row = `
-          <tr>
-            <td>${data.customerId}</td>
-            <td>${data.type}</td>
-            <td>${new Date(data.createdAt).toLocaleString()}</td>
-            <td>${data.status}</td>
-          </tr>
-        `;
-            historyBody.innerHTML += row;
-        });
-        historyTable.style.display = "block";
-    } else {
-        noHistoryMessage.style.display = "block";
+// Kiểm tra người dùng đã đăng nhập hay chưa
+function checkLogin() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (!isLoggedIn) {
+        alert("Vui lòng đăng nhập để gửi yêu cầu!");
+        window.location.href = "../html/login.html";  // Chuyển hướng tới trang đăng nhập
     }
 }
 
-// Khi nhấn vào nút "Xem lịch sử chăm sóc"
-document.getElementById("toggle-history-btn").addEventListener("click", () => {
-    const section = document.getElementById("history-section");
-    section.style.display = section.style.display === "none" ? "block" : "none";
-});
-// Lắng nghe thay đổi trong Firebase (Realtime Database)
-database.ref('contacts').on('child_changed', (snapshot) => {
-    const updatedData = snapshot.val();
-    const updatedContactId = snapshot.key;
+// Lấy lịch sử yêu cầu của người dùng
+function loadHistory() {
+    const userId = localStorage.getItem("currentUserId");
+    const historyBody = document.getElementById("history-body");
+    const table = document.getElementById("history-table");
+    const noMsg = document.getElementById("no-history-message");
 
-    const rows = document.querySelectorAll("#history-table tbody tr");
-    rows.forEach(row => {
-        const customerIdCell = row.cells[0];
-        const statusCell = row.cells[3];
+    historyBody.innerHTML = "";
+    table.style.display = "none";
+    noMsg.style.display = "none";
 
-        // Kiểm tra nếu là yêu cầu của user này
-        if (customerIdCell && customerIdCell.textContent === updatedData.customerId) {
-            statusCell.textContent = updatedData.status;
+    if (!userId) {
+        noMsg.style.display = "block";
+        return;
+    }
+
+    const contactsRef = ref(db, 'contacts');
+    onValue(contactsRef, (snapshot) => {
+        const data = snapshot.val();
+        let hasData = false;
+        historyBody.innerHTML = "";
+
+        for (let key in data) {
+            const entry = data[key];
+            if (entry.userId === userId) {
+                hasData = true;
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${entry.idCare}</td>
+                    <td>${entry.requestType}</td>
+                    <td>${new Date(entry.timestamp).toLocaleString()}</td>
+                    <td>${entry.status}</td>
+                `;
+                historyBody.appendChild(tr);
+            }
         }
+
+        if (hasData) table.style.display = "table";
+        else noMsg.style.display = "block";
     });
-});
+}

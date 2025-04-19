@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const ordersSnap = await get(ordersRef);
 
         if (!ordersSnap.exists()) {
-            orderList.innerHTML = "<p>Bạn chưa có đơn hàng nào.</p>";
+            orderList.innerHTML = "<p>Bạn chưa có khóa học nào.</p>";
             return;
         }
 

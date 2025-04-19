@@ -28,7 +28,7 @@ function showNotification(message, type = 'success', redirect = false) {
     setTimeout(() => {
         notif.classList.remove('show');
         if (redirect) {
-            window.location.href = "../index.html";
+            window.location.href = "../index-background.html";
         }
     }, 2500);
 }
