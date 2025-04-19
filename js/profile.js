@@ -31,87 +31,87 @@ if (isLoggedIn && currentUser) {
 }
 const style = document.createElement('style');
 style.textContent = `
-             .account {
-                position: relative;
-                margin-left: 10px;
-            }
-            .profile {
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                overflow: hidden;
-                cursor: pointer;
-            }
-            .profile img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-            .menu1 {
-                position: absolute;
-                top: 50px;
-                right: 0;
-                width: 220px;
-                background: white;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-                visibility: hidden;
-                opacity: 0;
-                transition: all 0.3s ease;
-                z-index: 999;
-            }
-            .menu1.active {
-                visibility: visible;
-                opacity: 1;
-            }
-            .menu1 ul {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-            .menu1 ul li {
-                padding: 12px 16px;
-                border-bottom: 1px solid #eee;
-                position: relative;
-                transition: background-color 0.2s ease;
-                overflow: hidden; 
-            }
-
-            .menu1 ul li a {
-                text-decoration: none;
-                color: #333;
-                display: flex;
-                align-items: center;
-                transition: color 0.3s ease;
-                position: relative;
-                z-index: 999;
-            }
-
-            
-
-            .menu1 ul li:hover a {
-                color: crimson;
-            }
-
-
-            .menu1 ul li:not(:last-child)::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                height: 2px;
-                width: 0;
-                background-color: crimson;
-                transition: width 0.3s ease;
-                z-index: 999;
-            }
-
-            .menu1 ul li:not(:last-child):hover::after {
-                width: 100%;
-            }
-            .menu1 ul li:last-child {
-                border-bottom: none;
-            }
+              .account {
+        position: relative;
+        margin-left: 10px;
+    }
+    .profile {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid #fff;
+    }
+    .profile img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }   
+    .menu1 {
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 220px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 999;
+        overflow: hidden;
+    }   
+    .menu1.active {
+        visibility: visible;
+        opacity: 1;
+    }
+    .menu1 ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .menu1 ul li {
+        padding: 0;
+        border-bottom: 1px solid #fff;
+        transition: background-color 0.2s ease;
+    }
+    .menu1 ul li a {
+        text-decoration: none;
+        color: #333;
+        display: flex;
+        align-items: center;
+        padding: 12px 10px;
+        transition: all 0.3s ease;
+        font-size: 14px;
+    }
+    .menu1 ul li a i {
+        margin-right: 10px;
+        width: 20px;
+        text-align: center;
+    }
+    .menu1 ul li:hover a {
+        color:rgb(209, 33, 130);
+    }
+    .menu1 ul li:last-child {
+        border-bottom: none;
+    }
+    .icon-cart span{
+      display: flex;
+      font-size: 5px;
+      width: 10px;
+       height: 10px;
+       background-color: red;
+       justify-content: center;
+       align-items: center;
+       color: aliceblue;
+       border-radius: 50%;
+       position: absolute;
+       top: 13%;
+       right: 180px;
+       z-index: 1;
+    }
+    
         `;
 document.head.appendChild(style);
 
