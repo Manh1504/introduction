@@ -1,35 +1,32 @@
+
 const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 const currentUser = localStorage.getItem("currentUser");
 
-const userArea = document.getElementById("userArea");
-
 if (isLoggedIn && currentUser) {
-    // Nếu đã đăng nhập, thay thế phần tử #userArea với thông tin tài khoản người dùng
+    const userArea = document.getElementById("userArea");
     userArea.innerHTML = `
-        <div class="account">
-            <div class="profile">
-                <img src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-user-icon-png-image_1796659.jpg" alt="Avatar">
-            </div>
-            <div class="menu1">
-                <ul>
-                    <div class="container">
+            <div class="account">
+                <div class="profile">
+                    <img src="https://png.pngtree.com/png-vector/20191009/ourmid/pngtree-user-icon-png-image_1796659.jpg" alt="Avatar">
+                </div>
+                <div class="menu1">
+                    <ul>
+                        <div class="container">
                         <div class="icon-cart">
                             <li><a href="#"><i class="fa-solid fa-basket-shopping"></i> Giỏ hàng</a></li>
                             <span>0</span>
-                        </div>
-                    </div>
-                    <li><a href="#"><i class="fa-solid fa-book"></i> Lịch sử mua hàng</a></li>
-                    <li><a href="../html/order.html"><i class="fa-solid fa-calendar-days"></i> Lớp của tôi</a></li>
-                    <li><a href="#" id="logoutLink"><i class="fa-solid fa-right-from-bracket"></i> Thoát</a></li>
-                </ul>
+                         </div>
+                        </div>  
+                        <li><a href="#"><i class="fa-solid fa-book"></i> Lịch sử mua hàng</a></li>
+                        <li><a href="../html/order.html"><i class="fa-solid fa-calendar-days"></i> Lớp của tôi</a></li>
+                        <li><a href="#" id="logoutLink"><i class="fa-solid fa-right-from-bracket"></i> Thoát</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    `;
-} else {
+        `;
 
-}
-const style = document.createElement('style');
-style.textContent = `
+    const style = document.createElement('style');
+    style.textContent = `
              .account {
                 position: relative;
                 margin-left: 10px;
@@ -83,7 +80,7 @@ style.textContent = `
                 align-items: center;
                 transition: color 0.3s ease;
                 position: relative;
-                z-index: 999;
+                z-index: 1;
             }
 
             
@@ -102,7 +99,7 @@ style.textContent = `
                 width: 0;
                 background-color: crimson;
                 transition: width 0.3s ease;
-                z-index: 999;
+                z-index: 0;
             }
 
             .menu1 ul li:not(:last-child):hover::after {
@@ -112,21 +109,20 @@ style.textContent = `
                 border-bottom: none;
             }
         `;
-document.head.appendChild(style);
+    document.head.appendChild(style);
 
-// Đăng xuất
-document.getElementById("logoutLink")?.addEventListener("click", function (e) {
-    e.preventDefault();
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("currentUser");
-    location.reload();  // Tải lại trang để cập nhật trạng thái
-});
+    // Đăng xuất
+    document.getElementById("logoutLink").addEventListener("click", function (e) {
+        e.preventDefault();
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("currentUser");
+        location.reload();
+    });
 
-// Mở/đóng menu khi click vào avatar
-const profile = document.querySelector(".profile");
-const menu = document.querySelector(".menu1");
+    // Mở/đóng menu khi click avatar
+    const profile = document.querySelector(".profile");
+    const menu = document.querySelector(".menu1");
 
-if (profile) {
     profile.addEventListener("click", function (e) {
         e.stopPropagation();
         menu.classList.toggle("active");
