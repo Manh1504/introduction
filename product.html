@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Import Products to Firebase</title>
+</head>
+
+<body>
+    <h1>Importing products...</h1>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCn9oE0KbfTnp5JD8VhuXW-y78xUFH-iRg",
+            authDomain: "bai-tap-html.firebaseapp.com",
+            databaseURL: "https://bai-tap-html-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "bai-tap-html",
+            storageBucket: "bai-tap-html.appspot.com",
+            messagingSenderId: "1825688805",
+            appId: "1:1825688805:web:0fea5be7f1db7f0339580c",
+            measurementId: "G-0QC28N9X9M"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        async function importProducts() {
+            try {
+                const response = await fetch("products.json");
+                const products = await response.json();
+
+                for (const product of products) {
+                    if (!product.id) {
+                        console.warn("❌ Sản phẩm thiếu ID:", product);
+                        continue;
+                    }
+
+                    const productRef = ref(db, "products/" + product.id);
+                    await set(productRef, product);
+                    console.log("✅ Đã thêm:", product.name);
+                }
+
+                alert("🟢 Import thành công tất cả sản phẩm!");
+            } catch (error) {
+                console.error("❌ Lỗi khi import:", error);
+                alert("❌ Có lỗi khi import sản phẩm.");
+            }
+        }
+
+        importProducts();
+    </script>
+</body>
+
+</html>

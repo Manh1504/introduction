@@ -1,56 +1,93 @@
-document.addEventListener('DOMContentLoaded', () => {
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
+// Firebase config
+const firebaseConfig = {
+    apiKey: "AIzaSyCn9oE0KbfTnp5JD8VhuXW-y78xUFH-iRg",
+    authDomain: "bai-tap-html.firebaseapp.com",
+    databaseURL: "https://bai-tap-html-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "bai-tap-html",
+    storageBucket: "bai-tap-html.appspot.com",
+    messagingSenderId: "1825688805",
+    appId: "1:1825688805:web:0fea5be7f1db7f0339580c",
+    measurementId: "G-0QC28N9X9M"
+};
+
+// Khởi tạo Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+document.addEventListener("DOMContentLoaded", async () => {
+    const orderList = document.getElementById("orderList");
     const currentUser = localStorage.getItem("currentUser");
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    const orderList = document.getElementById("orderList");
 
     if (!isLoggedIn || !currentUser) {
-        orderList.innerHTML = `<p>Vui lòng <a href="login.html">đăng nhập</a> để xem lịch sử đơn hàng.</p>`;
+        orderList.innerHTML = `<p>Vui lòng <a href="login.html">đăng nhập</a> để xem khóa học của bạn.</p>`;
         return;
     }
 
-    const orders = JSON.parse(localStorage.getItem('orders_' + currentUser)) || [];
+    try {
+        const ordersRef = ref(db, 'orders/' + currentUser);
+        const ordersSnap = await get(ordersRef);
 
-    if (orders.length === 0) {
-        orderList.innerHTML = "<p>Bạn chưa có đơn hàng nào.</p>";
-        return;
-    }
+        if (!ordersSnap.exists()) {
+            orderList.innerHTML = "<p>Bạn chưa có khóa học nào.</p>";
+            return;
+        }
 
-    fetch('../products.json')
-        .then(res => res.json())
-        .then(products => {
-            const purchased = [];
+        const orders = Object.values(ordersSnap.val());
 
-            orders.forEach(order => {
-                order.items.forEach(item => {
-                    const product = products.find(p => p.id == item.product_id);
-                    if (product && !purchased.some(p => p.id === product.id)) {
-                        purchased.push(product);
-                    }
-                });
-            });
+        const productsRef = ref(db, 'products');
+        const productsSnap = await get(productsRef);
 
-            if (purchased.length > 0) {
-                const listContainer = document.createElement('div');
-                listContainer.id = "orderListContainer";
+        if (!productsSnap.exists()) {
+            orderList.innerHTML = "<p>Không có khóa học nào trong hệ thống.</p>";
+            return;
+        }
 
-                purchased.forEach(product => {
-                    const courseCard = document.createElement('div');
-                    courseCard.className = "course-card";
+        const products = productsSnap.val();
+        const courseMap = {};
 
-                    // Tạo phần trăm hoàn thành ngẫu nhiên (tạm thời)
-                    const percent = Math.floor(Math.random() * 81) + 20;
+        Object.keys(products).forEach(key => {
+            const course = products[key];
+            if (course.id) {
+                courseMap[course.id.toString()] = course;
+            } else {
+                console.error(`Khóa học không có id:`, course);
+            }
+        });
 
-                    courseCard.innerHTML = `
-                        <img src="${product.images}" alt="${product.name}">
-                        <div class="course-content">
-                           <p class="course-title">${product.name}</p>
-                            <div class="progress-wrapper">
-                                <div class="progress-bar">
-                                    <div class="progress" style="width: ${percent}%;"></div>
+        const displayedCourses = new Set();
+
+        // Tạo div chứa các course-card với class .course-container
+        const container = document.createElement("div");
+        container.className = "course-container";
+
+        orders.forEach(order => {
+            if (!order.items) return;
+
+            order.items.forEach(item => {
+                if (item.product_id) {
+                    const course = courseMap[item.product_id.toString()];
+                    if (course && !displayedCourses.has(course.id)) {
+                        displayedCourses.add(course.id);
+
+                        const percent = Math.floor(Math.random() * 81) + 20;
+
+                        const card = document.createElement("div");
+                        card.className = "course-card";
+                        card.innerHTML = `                           
+                            <img src="${course.images}" alt="${course.name}">
+                            <div class="course-content">
+                                <p class="course-title">${course.name}</p>
+                                <div class="progress-wrapper">
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: ${percent}%;"></div>
+                                    </div>
+                                    <div class="progress-text">Đã hoàn thành: ${percent}%</div>
                                 </div>
-                                <div class="progress-text">Đã hoàn thành: ${percent}%</div>
-                            </div>
-                            <button class="button">
+                                <button class="button">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36px" height="36px">
                 <rect width="36" height="36" x="0" y="0" fill="#fdd835"></rect>
                 <path fill="#e53935" d="M38.67,42H11.52C11.27,40.62,11,38.57,11,36c0-5,0-11,0-11s1.44-7.39,3.22-9.59
@@ -83,20 +120,19 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="now">now!</span>
             <span class="study">study</span>
         </button>
-                        </div>
-                       
-                    `;
-
-                    listContainer.appendChild(courseCard);
-                });
-
-                orderList.appendChild(listContainer);
-            } else {
-                orderList.innerHTML = "<p>Không tìm thấy khóa học đã mua.</p>";
-            }
-        })
-        .catch(error => {
-            console.error('Lỗi khi tải danh sách khóa học:', error);
-            orderList.innerHTML = "<p>Không thể hiển thị khóa học đã mua do lỗi dữ liệu.</p>";
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    }
+                }
+            });
         });
+
+        orderList.innerHTML = ""; // Xóa nội dung cũ
+        orderList.appendChild(container); // Thêm container vào
+
+    } catch (error) {
+        console.error("Lỗi khi đọc dữ liệu:", error);
+        orderList.innerHTML = "<p>Không thể hiển thị khóa học đã mua do lỗi dữ liệu.</p>";
+    }
 });
