@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCn9oE0KbfTnp5JD8VhuXW-y78xUFH-iRg",
@@ -15,104 +15,75 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// Kiểm tra đăng nhập trước khi gửi yêu cầu
-document.getElementById("care-request-form").addEventListener("submit", async (e) => {
-    e.preventDefault();  // Dừng hành động mặc định của form
+// Hiển thị toast
+function showToast(message, type = "success") {
+    const toast = document.getElementById("toast-notification");
+    toast.textContent = message;
+    toast.className = `toast show ${type}`;
+    toast.classList.remove("hidden");
 
-    // Kiểm tra người dùng đã đăng nhập chưa
-    checkLogin();
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => {
+            toast.classList.add("hidden");
+        }, 300); // Đợi hiệu ứng biến mất rồi mới ẩn
+    }, 3000);
+}
 
-    const userId = localStorage.getItem("currentUserId");
-    const requestType = document.getElementById("requestType").value;
-    const description = document.getElementById("description").value;
-
-    // Kiểm tra nếu các trường dữ liệu còn trống
-    if (!requestType || !description) {
-        alert("Vui lòng điền đầy đủ thông tin yêu cầu!");
-        return;
-    }
-
-    // Tạo idCare tự động
-    const contactsRef = ref(db, 'contacts');
-    const snapshot = await get(contactsRef);
-    let nextId = 1000;
-
-    if (snapshot.exists()) {
-        const entries = Object.values(snapshot.val());
-        const ids = entries.map(item => parseInt(item.idCare?.replace("care-", "") || 0));
-        const maxId = Math.max(...ids, 999);
-        nextId = maxId + 1;
-    }
-
-    // Tạo yêu cầu chăm sóc mới với các trường {userId, loại yêu cầu, nội dung, trạng thái}
-    const newRequest = {
-        userId: userId,
-        requestType: requestType,
-        description: description,
-        status: "Đang xử lý",  // Trạng thái mặc định là "Đang xử lý"
-        timestamp: new Date().toISOString(),  // Thời gian gửi yêu cầu
-        idCare: `care-${nextId}`  // Tạo idCare tự động
-    };
-
-    // Lưu yêu cầu vào Firebase
-    try {
-        await set(ref(db, `contacts/${newRequest.idCare}`), newRequest);
-        alert("Yêu cầu của bạn đã được gửi.");
-        document.getElementById("care-request-form").reset();
-        loadHistory();  // Tải lại lịch sử yêu cầu
-    } catch (error) {
-        console.error("Lỗi khi gửi yêu cầu:", error); // In ra lỗi chi tiết trong console
-        alert("Đã xảy ra lỗi khi gửi yêu cầu: " + error.message);  // Hiển thị lỗi cho người dùng
-    }
-});
-
-// Kiểm tra người dùng đã đăng nhập hay chưa
+// Kiểm tra đăng nhập
 function checkLogin() {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (!isLoggedIn) {
-        alert("Vui lòng đăng nhập để gửi yêu cầu!");
-        window.location.href = "../html/login.html";  // Chuyển hướng tới trang đăng nhập
+        window.location.href = "../html/login.html";
+        throw new Error("Chưa đăng nhập"); // Ngăn submit nếu chưa đăng nhập
     }
 }
 
-// Lấy lịch sử yêu cầu của người dùng
-function loadHistory() {
-    const userId = localStorage.getItem("currentUserId");
-    const historyBody = document.getElementById("history-body");
-    const table = document.getElementById("history-table");
-    const noMsg = document.getElementById("no-history-message");
+// Gửi yêu cầu chăm sóc
+document.getElementById("care-request-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    historyBody.innerHTML = "";
-    table.style.display = "none";
-    noMsg.style.display = "none";
+    try {
+        checkLogin(); // Check trước
 
-    if (!userId) {
-        noMsg.style.display = "block";
-        return;
-    }
+        const userId = localStorage.getItem("currentUserId");
+        const requestType = document.getElementById("requestType").value;
+        const description = document.getElementById("description").value;
 
-    const contactsRef = ref(db, 'contacts');
-    onValue(contactsRef, (snapshot) => {
-        const data = snapshot.val();
-        let hasData = false;
-        historyBody.innerHTML = "";
-
-        for (let key in data) {
-            const entry = data[key];
-            if (entry.userId === userId) {
-                hasData = true;
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td>${entry.idCare}</td>
-                    <td>${entry.requestType}</td>
-                    <td>${new Date(entry.timestamp).toLocaleString()}</td>
-                    <td>${entry.status}</td>
-                `;
-                historyBody.appendChild(tr);
-            }
+        if (!requestType || !description) {
+            showToast("Vui lòng điền đầy đủ thông tin!", "error");
+            return;
         }
 
-        if (hasData) table.style.display = "table";
-        else noMsg.style.display = "block";
-    });
-}
+        // Tạo id tự động
+        const contactsRef = ref(db, 'contacts');
+        const snapshot = await get(contactsRef);
+        let nextId = 1000;
+
+        if (snapshot.exists()) {
+            const entries = Object.values(snapshot.val());
+            const ids = entries.map(item => parseInt(item.idCare?.replace("care-", "") || 0));
+            const maxId = Math.max(...ids, 999);
+            nextId = maxId + 1;
+        }
+
+        const newRequest = {
+            idCare: `care-${nextId}`,
+            userId,
+            requestType,
+            description,
+            status: "Đang xử lý",
+            timestamp: new Date().toISOString()
+        };
+
+        await set(ref(db, `contacts/${newRequest.idCare}`), newRequest);
+        showToast("Gửi yêu cầu thành công!", "success");
+        document.getElementById("care-request-form").reset();
+
+    } catch (error) {
+        if (error.message !== "Chưa đăng nhập") {
+            console.error("Lỗi gửi yêu cầu:", error);
+            showToast("Gửi yêu cầu thất bại!", "error");
+        }
+    }
+});
