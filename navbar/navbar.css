@@ -19,6 +19,7 @@
   }
   .menu {
     display: flex;
+    align-items: center;
   }
   .menu li {
     padding-left: 30px;

@@ -6,82 +6,81 @@
     <title>Liên hệ chúng tôi</title>
     <link rel="stylesheet" href="../navbar/navbar.css">
     <link rel="stylesheet" href="../navbar/universal.css">
-    <link rel="stylesheet" href="../navbar/contact.css">
-    <link rel="stylesheet" href="Contact.css">
+    <link rel="stylesheet" href="../navbar/universal.css">
+    <link rel="stylesheet" href="contact.css">
 </head>
 <body>
 <header>
     <nav style="position: fixed; top: 0; width: 100%;">
         <div class="nav-bar">
-            <li class="logo">
-            </li>
+            <div class="theme-toggle">
+                <i class="fas fa-moon dark-icon"></i>
+                <i class="fas fa-sun light-icon"></i>
+            </div>
+            <li class="logo"></li>
             <span class="menu font-sans">
                     <li><a href="../index-background.html" class="text-white text-center" href="#home">Home</a></li>
                     <li><a class="text-white text-center"  href="../Course/Course.html">Courses</a></li>
-                    <li><a class="text-white text-center" style="color:#AF4A92" href="contact.html">Contact Us</a></li>
+                    <li><a class="text-white text-center" style="color:#AF4A92 "href="contact.html">Contact Us</a></li>
                     <li><a class="text-white text-center" href="../About Us/AboutUs.html">About Us</a></li>
-                    <li>
-                        <a href="pages/login/login.html">
-                            <button class="btn-design text-bold">Login</button>
-                        </a>
-                    </li>
+                    <li id="userArea">
+                    <a href="../html/login.html" id="loginLink" class="text-white text-center">Login</a>
+                </li>
                     <label for="check" class="close-menu">
                         <i class="text-white fas fa-times"></i>
                     </label>
                 </span>
-
         </div>
-
         <label for="check" class="open-menu">
             <i class="text-white fas fa-bars"></i>
         </label>
-        </div>
     </nav>
 </header>
-<main style="padding: 120px 20px 40px;">
-    <h1>Gửi Yêu Cầu Chăm Sóc Khách Hàng</h1>
-    <form id="care-request-form">
-        <input type="hidden" id="customerId" name="customerId" />
+    <main style="padding: 120px 20px 40px;">
+        <h1>Gửi Yêu Cầu Chăm Sóc Khách Hàng</h1>
+        <form id="care-request-form">
+            <input type="hidden" id="customerId" name="customerId" />
 
-        <label for="requestType">Loại Yêu Cầu:</label>
-        <select id="requestType" name="requestType" required>
-            <option value="">-- Chọn loại yêu cầu --</option>
-            <option value="support">Hỗ trợ kỹ thuật</option>
-            <option value="feedback">Góp ý/Dịch vụ</option>
-            <option value="other">Khác</option>
-        </select>
+            <label for="requestType">Loại Yêu Cầu:</label>
+            <select id="requestType" name="requestType" required>
+                <option value="">-- Chọn loại yêu cầu --</option>
+                <option value="support">Hỗ trợ kỹ thuật</option>
+                <option value="feedback">Góp ý/Dịch vụ</option>
+                <option value="other">Khác</option>
+            </select>
 
-        <br><br>
+            <br><br>
 
-        <label for="description">Nội dung yêu cầu:</label><br>
-        <textarea id="description" name="description" rows="4" required></textarea>
+            <label for="description">Nội dung yêu cầu:</label><br>
+            <textarea id="description" name="description" rows="4" required></textarea>
 
-        <br><br>
-        <button type="submit" class="btn-design">Gửi Yêu Cầu</button>
-    </form>
+            <br><br>
+            <button type="submit" class="btn-design">Gửi Yêu Cầu</button>
+        </form>
 
-    <button id="toggle-history-btn">Xem lịch sử chăm sóc</button>
+        <button id="toggle-history-btn">Xem lịch sử chăm sóc</button>
 
-    <section id="history-section">
-        <h2>Lịch Sử Yêu Cầu Của Bạn</h2>
-        <div id="no-history-message" style="display: none; text-align: center; color: gray;">
-            <p>⚠️ Bạn chưa có lịch sử chăm sóc nào.</p>
-        </div>
-        <table id="history-table" style="display: none;">
-            <thead>
-            <tr>
-                <th>Mã KH</th>
-                <th>Loại yêu cầu</th>
-                <th>Thời gian gửi</th>
-                <th>Trạng thái</th>
-            </tr>
-            </thead>
-            <tbody id="history-body"></tbody>
-        </table>
-        <button onclick="document.getElementById('history-section').style.display='none'">Đóng lịch sử</button>
-    </section>
-</main>
-<script src="../js/db.js"></script>
-<script src="contact.js"></script>
+        <section id="history-section">
+            <h2>Lịch Sử Yêu Cầu Của Bạn</h2>
+            <div id="no-history-message" style="display: none; text-align: center; color: gray;">
+                <p>⚠️ Bạn chưa có lịch sử chăm sóc nào.</p>
+            </div>
+            <table id="history-table" style="display: none;">
+                <thead>
+                <tr>
+                    <th>Mã KH</th>
+                    <th>Loại yêu cầu</th>
+                    <th>Thời gian gửi</th>
+                    <th>Trạng thái</th>
+                </tr>
+                </thead>
+                <tbody id="history-body"></tbody>
+            </table>
+            <button onclick="document.getElementById('history-section').style.display='none'">Đóng lịch sử</button>
+        </section>
+    </main>
+    <script src="../js/db.js"></script>
+    <script src="contact.js"></script>
+    <script src="../js/profile.js"></script>
 </body>
 </html>
