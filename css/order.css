@@ -1,0 +1,178 @@
+body {
+  background-image: url('../images/card.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
+}
+
+#orderListContainer {
+  padding: 150px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.course-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.course-card {
+  background-color: #e6e4e9d4 !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  width: 100%;
+  max-width: 500px;
+
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+}
+
+.course-card img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+}
+
+.course-content {
+  padding: 5px;
+}
+
+.course-content p {
+  font-size: 16px;
+  font-weight: 600px;
+  margin-bottom: 10px;
+}
+
+.course-title {
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-size: 25px !important;
+  font-weight: bold;
+  color: #222;
+  text-align: center;
+}
+
+
+/* Progress section */
+.progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 5px;
+  transition: opacity 0.3s;
+}
+
+.progress {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  font-size: 20px;
+  color: #666;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Ẩn progress khi hover */
+.course-card:hover .progress-bar,
+.course-card:hover .progress-text {
+  display: none;
+}
+
+/* BUTTON STYLE */
+.button {
+  display: none;
+  /* Ẩn khi chưa hover */
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 10px;
+  color: white;
+  text-shadow: 2px 2px rgb(116, 116, 116);
+  text-transform: uppercase;
+  cursor: pointer;
+  border: solid 2px black;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-size: 17px;
+  background-color: #fdd835 !important;
+  border-radius: 50px !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  margin-top: 10px;
+}
+
+/* Hiện button khi hover vào card */
+.course-card:hover .button {
+  display: flex;
+}
+
+/* Button animation */
+.button:active {
+  transform: scale(0.9);
+  transition: all 100ms ease;
+}
+
+.button svg {
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+.button .play {
+  transition: all 0.5s ease;
+  transition-delay: 300ms;
+}
+
+.button:hover svg {
+  transform: scale(3) translate(50%);
+}
+
+.button .now {
+  position: absolute;
+  left: 0;
+  transform: translateX(-100%);
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+.button:hover .now {
+  transform: translateX(10px);
+  transition-delay: 300ms;
+}
+
+.button:hover .study {
+  transform: translateX(200%);
+  transition-delay: 300ms;
+}

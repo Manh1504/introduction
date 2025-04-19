@@ -1,0 +1,108 @@
+body {
+    background-color: #0D0D0D;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding-top: 80px;
+}
+
+main {
+    padding-top: 120px;
+    max-width: 800px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    color: #AF4A92;
+    margin-bottom: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+input, select, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.btn-design {
+    background-color: #AF4A92;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-design:hover {
+    background-color: #913b79;
+}
+
+/* Cải tiến CSS cho nút "Xem lịch sử" */
+#toggle-history-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+#toggle-history-btn:hover {
+    background-color: #45a049;
+}
+
+#history-section {
+    display: none;
+    margin-top: 30px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+#history-table th, #history-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+#history-table th {
+    background-color: #f2f2f2;
+}
+
+/* Cải tiến giao diện lịch sử khi không có dữ liệu */
+#no-history-message {
+    text-align: center;
+    color: #888;
+    font-size: 14px;
+}

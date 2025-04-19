@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/lichsumuahang.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Lịch sử mua hàng</title>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" width="80" height="80">
+                <h1>CodeWithMe</h1>
+            </div>
+            <div class="menu">
+                <a>Trang chủ</a>
+                <a href="#">Người đóng góp</a>
+                <a href="#">
+                    <div class="container">
+                        <div class="icon-cart">
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+                            </svg>
+                            <span>0</span>
+                        </div>
+                    </div>
+                </a>
+                <span id="userArea">
+                    <a href="html/đăng%20nhập.html" id="loginLink">Đăng nhập</a>
+                    <a href="html/đăng%20ký.html" id="registerLink">Đăng ký</a>
+                </span>
+            </div>
+        </div>
+    </header>
+<main>
+    <div class="purchase-container">
+        <!-- Bộ lọc -->
+        <div class="filter-section" style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+            <h2>Lịch sử mua hàng</h2>
+            <div class="filter-controls">
+            <div class="filter-item">
+            <label for="payment-type">Loại thanh toán</label>
+            <select id="payment-type" style="padding: 5px; margin: 5px 0;">
+            <option style="padding: 10px;">Tất cả</option>
+            <option style="padding: 10px;">Tiền mặt</option>
+            <option style="padding: 10px;">Chuyển khoản</option>
+            <option style="padding: 10px;">Online</option>
+            </select>
+            </div>
+            <div class="filter-item">
+            <label for="time-type">Loại thời gian</label>
+            <select id="time-type" style="padding: 5px; margin: 5px 0;">
+            <option style="padding: 10px;">Tháng</option>
+            <option style="padding: 10px;">Quý</option>
+            <option style="padding: 10px;">Năm</option>
+            </select>
+            </div>
+            <div class="filter-item" style="display: flex; gap: 30px; align-items: center;">
+            <div>
+            <label for="start-date">Thời gian bắt đầu</label>
+            <input type="month" id="start-date" value="2025-04" style="padding: 5px; margin: 5px 0;">
+            </div>
+            <div>
+            <label for="end-date">Thời gian kết thúc</label>
+            <input type="month" id="end-date" value="2025-04" style="padding: 5px; margin: 5px 0;">
+            </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Form thêm khóa học -->
+        <div class="add-course-form" style="background-color: #f1f1f1; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin-top: 20px;">
+            <h3>Thêm khóa học</h3>
+            <form id="addCourseForm">
+            <div class="form-item" style="margin-bottom: 15px;">
+                <label for="course-name">Tên khóa học</label>
+                <input type="text" id="course-name" placeholder="Nhập tên khóa học" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div class="form-item" style="margin-bottom: 15px;">
+                <label for="course-price">Giá</label>
+                <input type="text" id="course-price" placeholder="Nhập giá khóa học" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div class="form-item" style="margin-bottom: 15px;">
+                <label for="purchase-date">Ngày mua</label>
+                <input type="datetime-local" id="purchase-date" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <button type="submit" class="btn-add" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Thêm vào danh sách</button>
+            </form>
+        </div>
+
+       
+
+        <!-- Tổng giá trị và nút thanh toán -->
+        <div class="summary">
+            <h3>Tổng cộng: <span id="totalPrice">0đ</span></h3>
+            <button class="btn-pay">Thanh toán</button>
+        </div>
+    </div>
+</main>
+    <footer>
+        <p>&copy; 2025 CodeWithMe. All rights reserved.</p>
+    </footer>
+    <script>
+       // Lấy lịch sử mua hàng từ localStorage
+        const lichSuMuaHang = JSON.parse(localStorage.getItem("lichSuMuaHang")) || [];
+
+        // Hiển thị lịch sử mua hàng
+        const purchaseHistoryDiv = document.getElementById("purchaseHistory");
+        const totalPriceDiv = document.getElementById("totalPrice");
+
+        if (lichSuMuaHang.length === 0) {
+            purchaseHistoryDiv.innerHTML = `
+        <tr>
+            <td colspan="4" style="text-align: center;">Bạn chưa mua khóa học nào.</td>
+        </tr>`;
+        } else {
+            let totalPrice = 0;
+            const list = lichSuMuaHang.map(item => {
+                totalPrice += parseInt(item.giaKhoaHoc.replace(/\D/g, "")); // Loại bỏ ký tự không phải số
+                return `
+            <tr>
+                <td>${item.tenKhoaHoc}</td>
+                <td>${item.giaKhoaHoc}</td>
+                <td>${item.ngayMua}</td>
+                <td><button class="btn-remove" onclick="removeItem('${item.tenKhoaHoc}')">Xóa</button></td>
+            </tr>
+        `;
+            }).join("");
+            purchaseHistoryDiv.innerHTML = list;
+            totalPriceDiv.textContent = totalPrice.toLocaleString("vi-VN") + "đ";
+        }
+
+        // Hàm xóa khóa học khỏi lịch sử mua hàng
+        function removeItem(courseName) {
+            const updatedHistory = lichSuMuaHang.filter(item => item.tenKhoaHoc !== courseName);
+            localStorage.setItem("lichSuMuaHang", JSON.stringify(updatedHistory));
+            location.reload(); // Tải lại trang để cập nhật giao diện
+        }
+
+        // Sự kiện thanh toán
+        document.querySelector(".btn-pay").addEventListener("click", function () {
+            if (lichSuMuaHang.length === 0) {
+                alert("Không có khóa học nào để thanh toán.");
+            } else {
+                alert("Cảm ơn bạn đã thanh toán. Đơn hàng của bạn đang được xử lý!");
+                localStorage.removeItem("lichSuMuaHang"); // Xóa lịch sử mua hàng sau khi thanh toán
+                location.reload(); // Tải lại trang
+            }
+        });
+    </script>
+    
+</body>
+
+</html>
