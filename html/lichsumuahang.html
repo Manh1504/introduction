@@ -33,42 +33,59 @@
             <!-- Lịch sử mua hàng sẽ được hiển thị tại đây -->
         </div>
     </main>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const currentUser = localStorage.getItem("currentUser");
-            if (!currentUser) {
-                document.getElementById("orderHistory").innerHTML = "<p>Vui lòng đăng nhập để xem lịch sử mua hàng.</p>";
-                return;
-            }
+   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const currentUser = localStorage.getItem("currentUser");
+        const orderHistoryDiv = document.getElementById("orderHistory");
 
-            const userOrdersKey = `user_orders_${currentUser}`;
-            const savedOrders = localStorage.getItem(userOrdersKey);
-            const orders = savedOrders ? JSON.parse(savedOrders) : [];
+        if (!currentUser) {
+            orderHistoryDiv.innerHTML = "<p>Vui lòng đăng nhập để xem lịch sử mua hàng.</p>";
+            return;
+        }
 
-            const orderHistoryDiv = document.getElementById("orderHistory");
-            if (orders.length === 0) {
-                orderHistoryDiv.innerHTML = "<p>Bạn chưa có đơn hàng nào.</p>";
-            } else {
-                orders.forEach(order => {
-                    const orderDiv = document.createElement("div");
-                    orderDiv.classList.add("order");
+        const userOrdersKey = `user_orders_${currentUser}`;
+        const savedOrders = localStorage.getItem(userOrdersKey);
+        const orders = savedOrders ? JSON.parse(savedOrders) : [];
 
-                    const orderDetails = `
-                        <h2>Đơn hàng #${order.orderId}</h2>
-                        <p><strong>Ngày:</strong> ${order.date}</p>
-                        <ul>
-                            ${order.items.map(item => `
-                                <li>${item.name} - ${item.quantity} x ${item.price.toLocaleString()}đ</li>
-                            `).join('')}
-                        </ul>
-                        <p><strong>Tổng tiền:</strong> ${order.total.toLocaleString()}đ</p>
-                    `;
-                    orderDiv.innerHTML = orderDetails;
-                    orderHistoryDiv.appendChild(orderDiv);
-                });
-            }
-        });
-    </script>
+        if (orders.length === 0) {
+            orderHistoryDiv.innerHTML = `
+                <div class="order">
+                    <h2>Đơn hàng</h2>
+                    <p><strong>Tên khóa học:</strong> Chưa có</p>
+                    <p><strong>Số lượng:</strong> 0</p>
+                    <p><strong>Giá:</strong> 0đ</p>
+                    <p><strong>Ngày:</strong> Chưa có</p>
+                    <p><strong>Tổng tiền:</strong> 0đ</p>
+                </div>
+            `;
+        } else {
+            orders.forEach(order => {
+                const orderDiv = document.createElement("div");
+                orderDiv.classList.add("order");
+
+                const orderDate = new Date(order.date);
+                const formattedDate = `${orderDate.toLocaleDateString()} ${orderDate.toLocaleTimeString()}`;
+
+                const orderDetails = `
+                    <h2>Đơn hàng #${order.orderId}</h2>
+                    <p><strong>Ngày:</strong> ${formattedDate}</p>
+                    <ul>
+                        ${order.items.map(item => `
+                            <li>
+                                <strong>Tên khóa học:</strong> ${item.name} <br>
+                                <strong>Số lượng:</strong> ${item.quantity} <br>
+                                <strong>Giá:</strong> ${item.price.toLocaleString()}đ
+                            </li>
+                        `).join('')}
+                    </ul>
+                    <p><strong>Tổng tiền:</strong> ${order.total.toLocaleString()}đ</p>
+                `;
+                orderDiv.innerHTML = orderDetails;
+                orderHistoryDiv.appendChild(orderDiv);
+            });
+        }
+    });
+</script>
 </body>
 
 </html>
