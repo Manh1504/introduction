@@ -26,41 +26,29 @@ document.addEventListener('DOMContentLoaded', function() {
         // Lưu trạng thái vào localStorage
         localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
     });
-
-    const searchInput = document.querySelector(".search-input");
-    const searchBtn = document.querySelector(".search-button");
-    const courseCards = document.querySelectorAll(".courses-row .card");
-
-    // Hiển thị tất cả các khóa học khi không có bộ lọc
-    function showAllCourses() {
-        courseCards.forEach(card => card.style.display = "block");
-    }
-
-    // Lọc các khóa học theo từ khóa
-    function filterCourses() {
-        const keyword = searchInput.value.trim().toLowerCase();
-
-        if (keyword === "") {
-            showAllCourses(); // Nếu không có từ khóa, hiển thị tất cả khóa học
-            return;
-        }
-
-        courseCards.forEach(card => {
-            const courseName = card.querySelector(".title .name").textContent.toLowerCase();
-            card.style.display = courseName.includes(keyword) ? "block" : "none"; // Hiển thị khóa học nếu có tên chứa từ khóa
-        });
-    }
-
-    // Lắng nghe sự kiện nhấn nút tìm kiếm
-    searchBtn.addEventListener("click", filterCourses);
-
-    // Nếu người dùng nhập vào ô tìm kiếm, tự động hiển thị lại tất cả khi xóa hết
-    searchInput.addEventListener("input", () => {
-        if (searchInput.value.trim() === "") {
-            showAllCourses(); // Hiển thị lại tất cả nếu ô tìm kiếm rỗng
+    
+    // Search functionality
+    const searchInput = document.querySelector('.search-input');
+    const searchButton = document.querySelector('.search-button');
+    
+    searchButton.addEventListener('click', function() {
+        performSearch();
+    });
+    
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            performSearch();
         }
     });
-
+    
+    function performSearch() {
+        const searchTerm = searchInput.value.trim();
+        if (searchTerm) {
+            alert(`Đang tìm kiếm: ${searchTerm}`);
+            // Trong ứng dụng thực, bạn sẽ triển khai logic tìm kiếm thực tế ở đây
+        }
+    }
+    
     // Xem thêm khoá học
     const viewMoreBtn = document.querySelector('.view-more-btn');
     const hiddenCourses = document.querySelector('.hidden-courses');
