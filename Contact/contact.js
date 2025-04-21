@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+import { getDatabase, ref, set, get, push } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCn9oE0KbfTnp5JD8VhuXW-y78xUFH-iRg",
@@ -55,20 +55,8 @@ document.getElementById("care-request-form").addEventListener("submit", async (e
             return;
         }
 
-        // Tạo id tự động
-        const contactsRef = ref(db, 'contacts');
-        const snapshot = await get(contactsRef);
-        let nextId = 1000;
-
-        if (snapshot.exists()) {
-            const entries = Object.values(snapshot.val());
-            const ids = entries.map(item => parseInt(item.idCare?.replace("care-", "") || 0));
-            const maxId = Math.max(...ids, 999);
-            nextId = maxId + 1;
-        }
-
+        // Tạo dữ liệu yêu cầu mới
         const newRequest = {
-            idCare: `care-${nextId}`,
             userId,
             requestType,
             description,
@@ -76,7 +64,11 @@ document.getElementById("care-request-form").addEventListener("submit", async (e
             timestamp: new Date().toISOString()
         };
 
-        await set(ref(db, `contacts/${newRequest.idCare}`), newRequest);
+        // Sử dụng `push` để tạo ID tự động cho yêu cầu mới
+        const contactsRef = ref(db, 'contacts');
+        const newRequestRef = push(contactsRef);  // `push` tạo ID tự động
+        await set(newRequestRef, newRequest);
+
         showToast("Gửi yêu cầu thành công!", "success");
         document.getElementById("care-request-form").reset();
 

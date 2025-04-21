@@ -74,6 +74,7 @@ nav {
 
   /* For Desktop */
   .menu {
+<<<<<<< HEAD
     line-height: 50px;
   }
 
@@ -113,6 +114,14 @@ nav {
     z-index: 100;
     background-color: var(--blog);
     transition: all 0.2s ease-in-out;
+=======
+    display: flex;
+    align-items: center;
+  }
+  .menu li {
+    padding-left: 30px;
+
+>>>>>>> 7bc92555662d92fa03e7873d32ec0cdb09eab512
   }
 
   .menu li {
