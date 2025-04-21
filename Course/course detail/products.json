@@ -1,0 +1,45 @@
+[
+    {
+      "id": "1",
+      "name":"Khóa học Lập trình C cơ bản",
+      "images": "../images/C.jpg",
+      "price": 499000
+    },
+    {
+      "id": "2",
+      "name": "Khóa học JavaScript cơ bản",
+      "images": "https://example.com/image2.jpg",
+      "price": 600000
+    },
+    {
+        "id": "3",
+        "name": "Khóa học Python cơ bản",
+        "images": "https://example.com/image3.jpg",
+        "price": 700000
+    },
+    {
+        "id": "4",
+        "name": "Khóa học HTML & CSS",
+        "images": "https://example.com/image4.jpg",
+        "price": 800000
+    },
+    {
+        "id": "5",
+        "name": "Khóa học Thuật toán cơ bản",
+        "images": "https://example.com/image5.jpg",
+        "price": 900000
+    },
+    {
+        "id": "6",
+        "name": "Khóa học C++ nâng cao",
+        "images": "https://example.com/image6.jpg",
+        "price": 670000
+    },
+    {
+        "id": "7",
+        "name": "Khóa học ReactJS",
+        "images": "https://example.com/image7.jpg",
+        "price": 690000
+    }
+  ]
+  

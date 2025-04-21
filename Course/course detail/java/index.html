@@ -1,0 +1,110 @@
+<!-- Trang 3: Java cơ bản -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khóa học Java cơ bản</title>
+    <link rel="stylesheet" href="../../../navbar/navbar.css">
+    <link rel="stylesheet" href="../../../navbar/universal.css">
+    <link rel="stylesheet" href="../../../navbar/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav style="position: fixed; top: 0; width: 100%;">
+            <div class="nav-bar">
+                <div class="theme-toggle">
+                    <i class="fas fa-moon dark-icon"></i>
+                    <i class="fas fa-sun light-icon"></i>
+                </div>
+                <li class="logo"></li>
+                <span class="menu font-sans">
+                    <li><a href="../../../index-background.html" class="text-white text-center">Home</a></li>
+                    <li><a class="text-white text-center" style="color:#AF4A92" href="../../Course.html">Courses</a></li>
+                    <li><a class="text-white text-center" href="../../../Contact/Contact.html">Contact Us</a></li>
+                    <li><a class="text-white text-center" href="../../../About Us/AboutUs.html">About Us</a></li>
+                    <li>
+                        <a href="pages/login/login.html">
+                            <button class="btn-design text-bold">Login</button>
+                        </a>
+                    </li>
+                    <label for="check" class="close-menu">
+                        <i class="text-white fas fa-times"></i>
+                    </label>
+                </span>
+            </div>
+            <label for="check" class="open-menu">
+                <i class="text-white fas fa-bars"></i>
+            </label>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Phần nội dung khóa học bên TRÁI -->
+        <div class="left-content">
+            <!-- Khối 1: Tiêu đề khóa học -->
+            <div class="course-header">
+                <div class="course-header-container">
+                    <div class="course-main-content">
+                        <p class="course-summary">Khóa học Java cơ bản giúp học viên hiểu rõ cách xây dựng ứng dụng Java, nắm vững lập trình hướng đối tượng và các thư viện tiêu chuẩn.</p>
+                    </div>
+                    
+                    <div class="course-image-wrapper">
+                        <img src="java.jpg" alt="Khóa học Java" class="course-thumbnail">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Khối 2: Quyền lợi học viên -->
+            <div class="benefits-section">
+                <h2>Quyền lợi của học viên</h2>
+                <ul class="benefits-list">
+                    <li>✔️ Truy cập trọn đời tất cả tài liệu</li>
+                    <li>✔️ Hỗ trợ 24/7 từ giảng viên</li>
+                    <li>✔️ Chứng nhận hoàn thành khóa học</li>
+                    <li>✔️ Bài tập thực hành sau mỗi bài học</li>
+                </ul>
+            </div>
+            
+            <!-- Khối 3: Nội dung khóa học -->
+            <div class="course-content">
+                <h2>Nội dung khóa học</h2>
+                <div class="content-item">
+                    <h3>Chương 1: Cài đặt môi trường và cú pháp cơ bản</h3>
+                    <p>Cài đặt JDK, viết chương trình Java đầu tiên, cú pháp cơ bản</p>
+                </div>
+                <div class="content-item">
+                    <h3>Chương 2: Biến, kiểu dữ liệu và toán tử</h3>
+                    <p>Khai báo biến, kiểu dữ liệu nguyên thủy, các toán tử</p>
+                </div>
+                <div class="content-item">
+                    <h3>Chương 3: OOP trong Java: Class, Object, Kế thừa</h3>
+                    <p>Tạo lớp, đối tượng, tính kế thừa và đóng gói</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Phần thông tin đăng ký bên PHẢI -->
+        <div class="right-sidebar">
+            <div class="info-card">
+                <h3>Thông tin khóa học</h3>
+                <div class="price">600.000đ</div>
+                <button class="enroll-btn">Thêm vào giỏ hàng</button>
+                <div class="course-info">
+                    <p><i class="icon">📅</i> Thời lượng: 8 tuần</p>
+                    <p><i class="icon">🎓</i> Học viên: 1,200+</p>
+                    <p><i class="icon">📝</i> Bài giảng: 50+</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Copyright © 2025 CodeWithMe - Bài tập lớn Thiết kế Web.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
