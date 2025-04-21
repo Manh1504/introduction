@@ -1,91 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lịch Sử Mua Hàng</title>
-    <link rel="stylesheet" href="../css/lichsumuahang.css">
-</head>
-
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="../navbar/navbar.css">
+        <link rel="stylesheet" href="../navbar/style.css">
+        <link rel="stylesheet" href="../navbar/universal.css">
+        <style>
+            body {
+                background-color: #0D0D0D;
+                color: #FFFFFF;
+                font-family: 'Poppins', sans-serif;
+                margin: 0;
+                padding-top: 80px;
+            }
+            .order {
+                border: 1px solid #ccc;
+                padding: 15px;
+                margin-bottom: 15px;
+                border-radius: 8px;
+                background-color: #f9f9f9;
+            }
+            .item {
+                padding-left: 20px;
+            }
+        </style>
+    </head>
+    <body>
     <header>
-        <div class="header">
-            <div class="logo">
-                <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" width="80" height="80">
-                <h1>CodeWithMe</h1>
-            </div>
-            <div class="menu">
-                <a>Trang chủ</a>
-                <a href="#">Người đóng góp</a>
-                <a href="#">Giỏ hàng</a>
-                <button type="submit">Đăng nhập</button>
-                <div>
-                    <a href="#" class="login">Đăng ký</a>
-                </div>
-    
-    
-            </div>
-        </div>
-    </header>
-    <main>
-        <div id="orderHistory">
-            <!-- Lịch sử mua hàng sẽ được hiển thị tại đây -->
-        </div>
-    </main>
-   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const currentUser = localStorage.getItem("currentUser");
-        const orderHistoryDiv = document.getElementById("orderHistory");
+        <nav style="position: fixed; top: 0; width: 100%;">
+            <div class="nav-bar">
+                <li class="logo">
+                </li>
+                <span class="menu font-sans">
+                    <li>
+                        <a href="../index-background.html" class="text-white text-center" href="#home">Home</a>
+                      </li>
+                    <li>
+                      <a class="text-white text-center" href="../Course/Course.html">Courses</a>
+                    </li>
+                    <li><a class="text-white text-center" id="contact-link" href="../Contact/contact.html">Contact Us</a></li>
+                    <li>
+                      <a class="text-white text-center" style="color:#AF4A92" href="../About Us/AboutUs.html">About Us</a>
+                    </li>
+                     <li id="userArea">
+                        <a href="../html/login.html" id="loginLink">
+                            <button class="btn-design text-bold">Login</button>
+                        </a>
+                    </li>
+                    <label for="check" class="close-menu">
+                      <i class="text-white fas fa-times"></i>
+                    </label>
+                  </span>
 
-        if (!currentUser) {
-            orderHistoryDiv.innerHTML = "<p>Vui lòng đăng nhập để xem lịch sử mua hàng.</p>";
-            return;
+            </div>
+
+            <label for="check" class="open-menu">
+                <i class="text-white fas fa-bars"></i>
+            </label>
+            </div>
+        </nav>
+    </header>
+    <h1>Lịch sử mua hàng</h1>
+    <div id="order-history">Đang tải...</div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCn9oE0KbfTnp5JD8VhuXW-y78xUFH-iRg",
+            authDomain: "bai-tap-html.firebaseapp.com",
+            databaseURL: "https://bai-tap-html-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "bai-tap-html",
+            storageBucket: "bai-tap-html.appspot.com",
+            messagingSenderId: "1825688805",
+            appId: "1:1825688805:web:0fea5be7f1db7f0339580c",
+            measurementId: "G-0QC28N9X9M"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        function loadPurchaseHistory() {
+            const username = localStorage.getItem("currentUsername"); // Ví dụ: "kieu"
+            const container = document.getElementById("order-history");
+
+            if (!username) {
+                container.innerHTML = "Không tìm thấy tên người dùng. Hãy đăng nhập trước.";
+                return;
+            }
+
+            const ordersRef = ref(db, `orders/${username}`);
+            get(ordersRef)
+                .then(snapshot => {
+                    if (snapshot.exists()) {
+                        const orders = snapshot.val();
+                        displayOrders(orders);
+                    } else {
+                        container.innerHTML = "Bạn chưa có đơn hàng nào.";
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    container.innerHTML = "Đã xảy ra lỗi khi lấy dữ liệu.";
+                });
         }
 
-        const userOrdersKey = `user_orders_${currentUser}`;
-        const savedOrders = localStorage.getItem(userOrdersKey);
-        const orders = savedOrders ? JSON.parse(savedOrders) : [];
+        function displayOrders(orders) {
+            const container = document.getElementById("order-history");
+            container.innerHTML = "";
 
-        if (orders.length === 0) {
-            orderHistoryDiv.innerHTML = `
-                <div class="order">
-                    <h2>Đơn hàng</h2>
-                    <p><strong>Tên khóa học:</strong> Chưa có</p>
-                    <p><strong>Số lượng:</strong> 0</p>
-                    <p><strong>Giá:</strong> 0đ</p>
-                    <p><strong>Ngày:</strong> Chưa có</p>
-                    <p><strong>Tổng tiền:</strong> 0đ</p>
-                </div>
-            `;
-        } else {
-            orders.forEach(order => {
+            Object.values(orders).forEach(order => {
                 const orderDiv = document.createElement("div");
-                orderDiv.classList.add("order");
+                orderDiv.className = "order";
 
-                const orderDate = new Date(order.date);
-                const formattedDate = `${orderDate.toLocaleDateString()} ${orderDate.toLocaleTimeString()}`;
+                let itemsHTML = "";
+                if (order.items && Array.isArray(order.items)) {
+                    order.items.forEach((item, index) => {
+                        itemsHTML += `<div class="item">#${index + 1}: ${JSON.stringify(item)}</div>`;
+                    });
+                }
 
-                const orderDetails = `
-                    <h2>Đơn hàng #${order.orderId}</h2>
-                    <p><strong>Ngày:</strong> ${formattedDate}</p>
-                    <ul>
-                        ${order.items.map(item => `
-                            <li>
-                                <strong>Tên khóa học:</strong> ${item.name} <br>
-                                <strong>Số lượng:</strong> ${item.quantity} <br>
-                                <strong>Giá:</strong> ${item.price.toLocaleString()}đ
-                            </li>
-                        `).join('')}
-                    </ul>
-                    <p><strong>Tổng tiền:</strong> ${order.total.toLocaleString()}đ</p>
+                orderDiv.innerHTML = `
+                    <p><strong>Ngày đặt:</strong> ${order.date}</p>
+                    <p><strong>ID đơn hàng:</strong> ${order.orderId}</p>
+                    <p><strong>Người đặt:</strong> ${order.user}</p>
+                    <div><strong>Sản phẩm:</strong>${itemsHTML || "Không có sản phẩm nào"}</div>
                 `;
-                orderDiv.innerHTML = orderDetails;
-                orderHistoryDiv.appendChild(orderDiv);
+
+                container.appendChild(orderDiv);
             });
         }
-    });
-</script>
-</body>
 
+        window.onload = loadPurchaseHistory;
+    </script>
+    <script src="../js/profile.js"></script>
+    </body>
 </html>
