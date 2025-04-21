@@ -1,131 +1,143 @@
 .nav-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
-    position: relative;
-    padding: 12px 20px;
-  }
-  
-  nav {
-    background-color: transparent;
-    backdrop-filter: blur(10px);
-    z-index: 999;
-    box-shadow: var(--navbar-shadow) 0px 5px 15px 0px;
-  }
-  
-  .logo img {
-    width: 180px;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  position: relative;
+  padding: 12px 20px;
+}
+
+nav {
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  z-index: 999;
+  box-shadow: var(--navbar-shadow) 0px 5px 15px 0px;
+}
+
+.logo img {
+  width: 180px;
+}
+
+.menu {
+  display: flex;
+}
+
+.menu li {
+  padding-left: 30px;
+  align-items: center;
+}
+
+.menu li a {
+  display: inline-block;
+  text-decoration: none;
+  transition: color 0.3s ease, border 0.3s ease;
+  position: relative;
+  color: white;
+  /* màu mặc định */
+  font-weight: 500;
+}
+
+/* Hiệu ứng underline và đổi màu khi hover */
+.menu li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #d63384;
+  /* màu hồng tím */
+  transition: width 0.3s ease;
+}
+
+.menu li a:hover {
+  color: #d63384;
+  /* chuyển màu chữ */
+}
+
+.menu li a:hover::after {
+  width: 100%;
+}
+
+
+
+.wrapper p {
+  text-align: center;
+  letter-spacing: 15px;
+  background: #34495e;
+  color: #fff;
+}
+
+/* Theme Change Toogle Ended */
+
+@media only screen and (min-width: 900px) {
+
+  /* For Desktop */
   .menu {
-    display: flex;
+    line-height: 50px;
   }
-  .menu li {
-    padding-left: 30px;
+
+  .btn-design {
+    font-size: 16px;
+    padding: 8px 28px;
+    font-weight: 700;
+    background-color: transparent;
+    border: 2px solid red;
+    color: red;
+    transition: 0.3s ease-in-out;
+    border-radius: 5px;
+  }
+
+  .btn-design:hover {
+    background-color: red;
+    color: white;
+    cursor: pointer;
+  }
+
+  .nav-bar {
+    padding: 1% 10%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+
+  /* For Mobile */
+  .menu {
+    flex-direction: column;
     align-items: center;
+    width: 80%;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    right: -100%;
+    z-index: 100;
+    background-color: var(--blog);
+    transition: all 0.2s ease-in-out;
   }
+
+  .menu li {
+    margin-top: 40px;
+  }
+
   .menu li a {
-    display: inline-block;
-    text-decoration: none;
-    transition: color 0.3s ease, border 0.3s ease;
-    position: relative;
-    color: white; /* màu mặc định */
-    font-weight: 500;
+    padding: 10px;
   }
-  
-  /* Hiệu ứng underline và đổi màu khi hover */
-  .menu li a::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #d63384; /* màu hồng tím */
-    transition: width 0.3s ease;
-  }
-  
-  .menu li a:hover {
-    color: #d63384; /* chuyển màu chữ */
-  }
-  
-  .menu li a:hover::after {
-    width: 100%;
-  }
-  
 
+  .btn-design {
+    font-size: 16px;
+    padding: 8px 28px;
+  }
 
-  .wrapper p {
-    text-align: center;
-    letter-spacing: 15px;
-    background: #34495e;
-    color: #fff;
+  .wrapper {
+    margin: 0px 25px 0px 0px;
   }
-  /* Theme Change Toogle Ended */
-  
-  @media only screen and (min-width: 900px) {
-    /* For Desktop */
-    .menu {
-      line-height: 80px;
-    }
-  
-    .btn-design {
-        font-size: 16px;
-        padding: 8px 28px;
-        font-weight: 700;
-        background-color: transparent;
-        border: 2px solid red;
-        color: red;
-        transition: 0.3s ease-in-out;
-        border-radius: 5px;
-      }
-      .btn-design:hover {
-        background-color: red;
-        color: white;
-        cursor: pointer;
-      }
-  
-    .nav-bar {
-      padding: 1% 10%;
-    }
+
+  .open-menu,
+  .close-menu {
+    display: block;
   }
-  
-  @media only screen and (max-width: 900px) {
-    /* For Mobile */
-    .menu {
-      flex-direction: column;
-      align-items: center;
-      width: 80%;
-      height: 100vh;
-      position: fixed;
-      top: 0px;
-      right: -100%;
-      z-index: 100;
-      background-color: var(--blog);
-      transition: all 0.2s ease-in-out;
-    }
-    .menu li {
-      margin-top: 40px;
-    }
-    .menu li a {
-      padding: 10px;
-    }
-  
-    .btn-design {
-      font-size: 16px;
-      padding: 8px 28px;
-    }
-  
-    .wrapper {
-      margin: 0px 25px 0px 0px;
-    }
-  
-    .open-menu,
-    .close-menu {
-      display: block;
-    }
-    #check:checked ~ .menu {
-      right: 0;
-    }
+
+  #check:checked~.menu {
+    right: 0;
   }
-  
+}

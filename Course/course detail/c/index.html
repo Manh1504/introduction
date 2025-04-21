@@ -24,11 +24,9 @@
                     <li><a class="text-white text-center" style="color:#AF4A92" href="../../Course.html">Courses</a></li>
                     <li><a class="text-white text-center" href="../../../Contact/Contact.html">Contact Us</a></li>
                     <li><a class="text-white text-center" href="../../../About Us/AboutUs.html">About Us</a></li>
-                    <li>
-                        <a href="pages/login/login.html">
+                    <li id="userArea"><a href="../../../html/login.html" id="loginLink">
                             <button class="btn-design text-bold">Login</button>
                         </a>
-                    </li>
                     <label for="check" class="close-menu">
                         <i class="text-white fas fa-times"></i>
                     </label>
@@ -84,7 +82,8 @@
             <div class="info-card">
                 <h3>Thông tin khóa học</h3>
                 <div class="price">499.000đ</div>
-                <button class="enroll-btn">Thêm vào giỏ hàng</button>
+                <button class="enroll-btn" data-id="1">Thêm vào giỏ hàng</button>
+                
                 <div class="course-info">
                     <p><i class="icon">📅</i> Thời lượng: 6 tuần</p>
                     <p><i class="icon">🎓</i> Học viên: 950+</p>
@@ -99,5 +98,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="../../../js/profile.js"></script>
 </body>
 </html>
