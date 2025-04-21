@@ -45,8 +45,8 @@ function checkLoginStatus() {
                     console.log("Phiên đăng nhập hợp lệ");
 
                     // Kiểm tra nếu không phải trang đăng nhập và signup thì mới chuyển hướng
-                    if ((window.location.href.includes("login.html") || window.location.href.includes("signup.html"))) {
-                        return; // Đừng thực hiện điều hướng nếu đã ở trang login hoặc signup
+                    if ((window.location.href.includes("login.html"))) {
+                        return; // Đừng thực hiện điều hướng nếu đã ở trang login
                     }
 
                     if (isAdmin) {
@@ -78,6 +78,7 @@ function logout() {
     }
 
     localStorage.clear();
+
     window.location.href = "../login.html"; // Điều hướng về trang đăng nhập
 }
 
@@ -179,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Đăng nhập admin và thay đổi liên kết khi đăng nhập
+    // Đăng nhập admin
     document.getElementById('login-form').addEventListener('submit', function (e) {
         e.preventDefault();
         const username = document.getElementById('login-username').value.trim();

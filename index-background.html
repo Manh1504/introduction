@@ -54,10 +54,13 @@
             </div>
         </div>
     </div>
-    <script src="./js/admin.js"></script>
+    <script>
+        const script = document.createElement("script");
+        script.src = "./js/admin.js?v=" + new Date().getTime(); // Ép load lại mỗi lần
+        document.body.appendChild(script);
+    </script>
     <script src="background/javascript/audio.js"></script>
     <script src="./js/login.js"></script>
     <script src="./js/profile.js"></script>
-
 </body>
 </html>
