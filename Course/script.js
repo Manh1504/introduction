@@ -17,32 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (courseLink) courseLink.style.color = body.classList.contains('light-mode') ? '#AF4A92' : '';
         localStorage.setItem('theme', body.classList.contains('light-mode') ? 'light' : 'dark');
     });
-<<<<<<< HEAD
-    
-    // Search functionality
-    const searchInput = document.querySelector('.search-input');
-    const searchButton = document.querySelector('.search-button');
-    
-    searchButton.addEventListener('click', function() {
-        performSearch();
-    });
-    
-    searchInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            performSearch();
-        }
-    });
-    
-    function performSearch() {
-        const searchTerm = searchInput.value.trim();
-        if (searchTerm) {
-            alert(`Đang tìm kiếm: ${searchTerm}`);
-            // Trong ứng dụng thực, bạn sẽ triển khai logic tìm kiếm thực tế ở đây
-        }
-    }
-    
-    // Xem thêm khoá học
-=======
 
     // ==== Tìm kiếm khóa học ====
     const searchInput = document.querySelector(".search-input");
@@ -77,9 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
             showAllCourses();
         }
     });
-
-    // ==== Xem thêm khóa học ====
->>>>>>> 3ab6b8a85f6f536a82c981a07cc3af2f4371a0b3
     const viewMoreBtn = document.querySelector('.view-more-btn');
     const hiddenCourses = document.querySelector('.hidden-courses');
 

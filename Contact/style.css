@@ -1,0 +1,199 @@
+/* ===== LIGHT MODE STYLES ===== */
+body.light-mode {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Navbar */
+body.light-mode .nav-bar a.text-white,
+body.light-mode .nav-bar .text-white {
+    color: #333 !important;
+}
+
+/* Giữ màu tím cho mục Course */
+body.light-mode .nav-bar a[href="Course.html"] {
+    color: #AF4A92 !important;
+}
+
+/* Nút Login */
+body.light-mode .nav-bar .btn-design {
+    color: #333 !important;
+    border-color: #FF4C8B !important;
+}
+
+body.light-mode .nav-bar .btn-design:hover {
+    background-color: #FF4C8B !important;
+    color: white !important;
+}
+
+/* Hero Banner */
+body.light-mode .hero-banner {
+    background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), 
+                url('images/gaming-bg.jpg') center/cover no-repeat;
+}
+
+body.light-mode .welcome-text {
+    color: #AF4A92;
+}
+
+body.light-mode .hero-banner h1 {
+    background: linear-gradient(45deg, #AF4A92, #6B3FA0);
+    -webkit-background-clip: text;
+}
+
+/* Search Bar */
+body.light-mode .search-input {
+    background: rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+body.light-mode .search-button {
+    background: linear-gradient(45deg, #AF4A92, #6B3FA0);
+}
+
+/* Sections */
+body.light-mode .courses-section,
+body.light-mode .library-section {
+    background-color: #D7D7D7;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+body.light-mode .section-header::after {
+    background: linear-gradient(to right, #AF4A92, #6B3FA0);
+}
+
+/* Cards */
+body.light-mode .course-card,
+body.light-mode .library-item {
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+body.light-mode .course-details h3,
+body.light-mode .course-info h3,
+body.light-mode .course-meta p {
+    color: #333;
+}
+
+body.light-mode .course-meta span {
+    color: #666;
+}
+
+/* View All Button */
+body.light-mode .view-all {
+    color: #333;
+    border-color: #AF4A92;
+}
+
+body.light-mode .view-all:hover {
+    background: #AF4A92;
+    color: white;
+}
+
+/* Theme Toggle Icons */
+body.light-mode .light-icon {
+    opacity: 1;
+    color: #AF4A92;
+}
+
+body.light-mode .dark-icon {
+    opacity: 0;
+}
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card, .library-item, .courses-section, .library-section {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+/* Ẩn menu icon khi chưa cần thiết */
+.open-menu, .close-menu {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    /* Chỉ hiển thị khi ở mobile */
+    .open-menu {
+        display: block !important;
+    }
+    
+    /* Hiển thị close icon khi menu đang mở */
+    .nav-bar .menu.active + .open-menu {
+        display: none !important;
+    }
+    
+    .nav-bar .menu.active .close-menu {
+        display: block !important;
+    }
+}
+/* Style cho nav links */
+.nav-bar .menu a {
+    color: white;
+    transition: color 0.3s;
+}
+
+/* Light mode */
+body.light-mode .nav-bar .menu a {
+    color: #333;
+}
+
+/* Màu khi active (khi ở trang đó) */
+.nav-bar .menu a[href="contact.html"],
+.nav-bar .menu a[href="Contact/contact.html"] { /* Chọn selector phù hợp với đường dẫn của bạn */
+    color: #AF4A92 !important;
+}
+
+/* Light mode - vẫn giữ màu tím khi active */
+body.light-mode .nav-bar .menu a[href="contact.html"],
+body.light-mode .nav-bar .menu a[href="Contact/contact.html"] {
+    color: #AF4A92 !important;
+}
+.theme-toggle {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.theme-toggle i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+/* Mặc định: hiển thị moon (dark), ẩn sun (light) */
+.dark-icon {
+    opacity: 1;
+}
+.light-icon {
+    opacity: 0;
+}
+
+/* Light mode: hiển thị sun, ẩn moon */
+body.light-mode .dark-icon {
+    opacity: 0;
+}
+body.light-mode .light-icon {
+    opacity: 1;
+}
+/* Màu cho icon trong chế độ tối (dark) */
+.dark-icon {
+    color: #AF4A92 !important; /* Màu tím */
+}
+
+/* Màu cho icon trong chế độ sáng (light) */
+.light-icon {
+    color: #000 !important; /* Màu đen */
+}
+
+/* Khi ở chế độ sáng */
+body.light-mode .dark-icon {
+    color: #AF4A92 !important; /* Vẫn giữ màu tím nếu cần */
+}
+
+body.light-mode .light-icon {
+    color: #000 !important; /* Màu đen */
+}

@@ -45,18 +45,7 @@ th {
     background-color: #f2f2f2;
 }
 
-.btn-design {
-    background-color: #AF4A92;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-.btn-design:hover {
-    background-color: #913b79;
-}
 
 .toast {
     position: fixed;
