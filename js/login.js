@@ -66,21 +66,53 @@ function checkLoginStatus() {
     }
 }
 
-// Đăng xuất
+// Hàm cập nhật liên kết "Contact Us"
+function updateContactLink() {
+    const contactLink = document.getElementById('contact-link');
+    if (!contactLink) return;
+
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const isAdmin = localStorage.getItem("isAdmin") === "true";
+
+    if (isLoggedIn && isAdmin) {
+        contactLink.textContent = "Admin Dashboard";
+        contactLink.href = "../admin/admin.html";
+    } else {
+        contactLink.textContent = "Contact Us";
+        contactLink.href = "../html/contact.html";
+    }
+}
+
+// Hàm đăng xuất
 function logout() {
     const sessionId = localStorage.getItem("sessionId");
     const userId = localStorage.getItem("currentUserId");
     const isAdmin = localStorage.getItem("isAdmin") === "true";
 
+    // Xóa phiên làm việc khỏi Firebase
     if (sessionId && userId) {
         const sessionPath = isAdmin ? `admin/sessions/${sessionId}` : `users/${userId}/sessions/${sessionId}`;
-        set(ref(db, sessionPath), null);
+        const sessionRef = ref(db, sessionPath);
+        remove(sessionRef).catch((error) => {
+            console.error("Lỗi khi xóa phiên làm việc:", error);
+        });
     }
 
+    // Xóa thông tin trong localStorage
     localStorage.clear();
 
-    window.location.href = "../login.html"; // Điều hướng về trang đăng nhập
+    // Cập nhật lại liên kết "Contact Us"
+    updateContactLink();
+
+    // Chuyển hướng về trang đăng nhập
+    window.location.href = "../login.html";
 }
+
+// Gọi cập nhật liên kết khi trang được tải
+document.addEventListener('DOMContentLoaded', () => {
+    updateContactLink();
+});
+
 
 // Lưu phiên đăng nhập mới
 function saveLoginSession(userId, isAdmin, expireHours = 24) {
@@ -229,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             // Lưu phiên đăng nhập admin vào Firebase
                             saveLoginSession("admin", true).then(() => {
-                                showNotification("Đăng nhập Admin thành công!", "success", true, "../index-background.html");
+                                showNotification("Đăng nhập Admin thành công!", "success", true, "../admin/admin.html");
 
                             });
                         } else {
