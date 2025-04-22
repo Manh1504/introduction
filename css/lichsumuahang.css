@@ -140,3 +140,12 @@ main {
     color: #333;
     font-weight: bold;
 }
+.course-summary {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.order-time {
+    font-size: 12px;
+    color: #777;
+}
